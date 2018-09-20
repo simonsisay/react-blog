@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Adamina|Lalezar|Noto+Serif+JP|Roboto+Slab|Sigmar+One');
+
+
+.sidebar{
+	background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+ 	background-blend-mode: multiply,multiply !important;
+	height: 100vh;
+	position: fixed;
+	z-index: 2;
+}
+
+
+
+.sidebar-header{
+	margin-top:10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-family: 'Adamina', serif;
+	border-bottom:.1px solid #868D90;
+	padding-left:10px;
+}
+
+.sidebar-header h5 {
+	color:white !important;
+}
+
+.sidebar-header a{
+	text-decoration:none !important;
+}
+
+.sidebar-header p{
+	color:lightgray !important;
+}
+
+.ant-layout-sider-children{
+	background-color: #020008;
+	background-image: url("https://www.transparenttextures.com/theme/images/transparent.png") !important;
+	height: 100vh !important;
+	overflow-y: scroll !important;
+	overflow-x: hidden;
+}
+
+
+.ant-menu-light{
+	background:none !important;
+}
+
+
+.menu{
+	margin:0;
+	padding:0;
+	border-right:none !important;
+}
+
+.nav-item a{
+	border-bottom:.1px solid #868D90 !important;
+}
+
+.ant-menu-item-selected{
+	background:none !important;
+}
+
+.nav-item a:visited{
+	color:white !important;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.nav-container {
+	padding-top:40px !important;
+}
+
+.nav-container h6{
+	text-align:left;
+	color:white;
+	font-weight:bold;
+	margin-top:40px;
+	margin-left:15px;
+}
+
+.ant-menu-inline .ant-menu-item:after {
+     border-right:none !important; 
+}
+
+.active-nav{
+	font-weight: bold;
+	font-size:18px;
+}
+
+.menu img{
+	height:100px;
+	width:100px;
+	border-radius:50%
+}
+
+.user-buttons{
+	display: flex;
+	justify-content: center;
+	margin-top:5px;
+}
+
+.user-buttons button{
+	padding:5px !important;
+}
