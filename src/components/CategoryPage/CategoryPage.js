@@ -1,9 +1,19 @@
 import React from 'react'
+import Blog from '../common/Blog'
+import "./category.css"
+import TrendingArticles from '../common/TrendingArticles'
+import RecentArticles from '../common/RecentArticles'
 
 const CategoryPage = () => {
 	return(
 		<div className="content">
-			<h1>This is the Category Page</h1>
+			<div className="category-header">
+				<h2 className="h2-responsive category-name font-weight-bold">Category name</h2>
+				<button className="btn btn-sm btn-outline-green">Follow</button>
+			</div>
+			
+			<TrendingArticles/>
+			<RecentArticles />
 		</div>
 	)
 }

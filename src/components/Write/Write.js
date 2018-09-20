@@ -1,9 +1,11 @@
 import React from 'react'
+import BlogWrittingForm from './BlogWrittingForm'
+
 
 const Write = () => {
 	return(
 		<div className="content">
-			<h1>This is the write page</h1>
+			<BlogWrittingForm />
 		</div>
 	)
 }

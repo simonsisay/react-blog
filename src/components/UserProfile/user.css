@@ -1,3 +1,8 @@
+@media(max-width:768px){
+
+}
+
+
 .user-content{
 	width: 90%;
 	margin-top:50px;
@@ -16,6 +21,15 @@
 	width: 120px;
 	height:120px;
 	float:right;
+}
+
+.avatar-and-button{
+	display: flex;
+	flex-direction: column;
+}
+
+.btn-outline-green{
+	padding:5px !important;
 }
 
 .badge{

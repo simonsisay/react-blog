@@ -7,6 +7,7 @@ import UserPage from '../components/UserProfile/UserPage'
 import BlogPage from '../components/BlogPage/BlogPage'
 import Sidebar from '../components/sidebar/sidebar'
 
+
 const Routes = () => {
 	return(
 		<Router>
@@ -15,7 +16,7 @@ const Routes = () => {
   			<Switch className="content">
   				<Route path="/" component={Home} exact />
   				<Route path="/write" component={Write} />
-  				<Route path="/category" component={CategoryPage} />
+  				<Route path="/category/:id" component={CategoryPage} />
   				<Route path="/user" component={UserPage} />
   				<Route path="/blog" component={BlogPage} />
   			</Switch>

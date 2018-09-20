@@ -1,7 +1,7 @@
  import React from 'react' 
  import { Menu  } from 'antd'
  import { Link } from 'react-router-dom'
-
+import Search from '../common/Search'
 
 const UserNav = () => {
 	return(
@@ -15,6 +15,7 @@ const UserNav = () => {
         <button className=" btn btn-sm btn-danger">Sign out</button>
       </div>
       <hr />
+      <Search />
     </div>
 	)
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import TrendingArticles from './TrendingArticles'
+import TrendingArticles from '../common/TrendingArticles'
 import './home.css'
-import RecentArticles from './RecentArticles'
+import RecentArticles from '../common/RecentArticles'
 
 
 class Home extends Component {

@@ -1,0 +1,46 @@
+.blog-form-container{
+	width:70vw !important;
+	margin-left:50px;
+}
+
+.text-area-form{
+	overflow-y: scroll;
+}
+
+.radio-buttons{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.radio-header{
+	padding:0 !important;
+	margin:0 !important;
+	text-align: center;
+	padding-top:10px !important;
+}
+
+.radio-input{
+	display: flex;
+	margin:5px 20px;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.radio-input label{
+	padding-right:15px;
+	padding-top:10px;
+
+}
+
+.radio-input input{
+	align-self:center;
+}
+
+.post-button{
+	display: flex;
+	justify-content: center;
+	padding:10px;
+	margin-bottom: 20px;
+}
+

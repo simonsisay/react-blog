@@ -1,9 +1,14 @@
 import React from 'react'
+import BlogReadPage from './BlogReadPage'
+import './blogRead.css'
+import CommentSection from './CommentSection'
+
 
 const BlogPage = () => {
 	return(
 		<div className="content">
-			<h1>This is the blog page</h1>
+			<BlogReadPage />
+			<CommentSection />
 		</div>
 	)
 }

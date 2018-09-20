@@ -1,0 +1,32 @@
+@media(min-width: 769px){
+	.blog-read-page{
+		
+	}
+	.twitter-icon{
+		padding-right:200px;
+	}
+
+.blogg{
+	padding-left:90px;
+}
+}
+
+
+.blog-read-page{
+	max-width: 90% !important;
+	margin:auto !important;
+}
+
+.heart-icon, .twitter-icon{
+	cursor:pointer;
+}
+
+
+.article-footer{
+	margin-top:120px;
+	padding:20px;
+	border-top:.1px solid #ccced1 !important;
+	display: flex;
+	justify-content:space-between;
+}
+

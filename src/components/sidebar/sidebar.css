@@ -33,6 +33,7 @@
 	color:lightgray !important;
 }
 
+
 .ant-layout-sider-children{
 	background-color: #020008;
 	background-image: url("https://www.transparenttextures.com/theme/images/transparent.png") !important;
@@ -53,6 +54,9 @@
 	border-right:none !important;
 }
 
+.nav-item a{
+	color:white !important;
+}
 .nav-item a{
 	border-bottom:.1px solid #868D90 !important;
 }
@@ -102,4 +106,8 @@
 
 .user-buttons button{
 	padding:5px !important;
+}
+
+.bookmarked-articles a{
+	font-size:small;
 }
