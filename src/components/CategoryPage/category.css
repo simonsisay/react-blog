@@ -3,7 +3,12 @@
 }
 
 .category-header{
+	background:white;
 	display: flex;
 	justify-content: space-around;
-	margin-bottom:100px !important;
+	margin-bottom:50px !important;
+}
+
+.category-header .sticky-top{
+	z-index:2 !important;
 }

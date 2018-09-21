@@ -6,19 +6,19 @@
  	return (
  		<Menu className="menu" mode='inline' >
         <Menu.Item className="nav-item">
-          <NavLink  activeClassName="active-nav" exact to="/category/design">Design</NavLink>
+          <NavLink  activeClassName="active-nav" exact to="/category/design">Art</NavLink>
         </Menu.Item>
         <Menu.Item className="nav-item">
-          <NavLink activeClassName="active-nav" to="/category/art">Art</NavLink>
+          <NavLink activeClassName="active-nav" to="/category/art">Politics</NavLink>
         </Menu.Item>
         <Menu.Item className="nav-item">
-          <NavLink  activeClassName="active-nav" to="/category/music">Music</NavLink>
+          <NavLink  activeClassName="active-nav" to="/category/music">Sport</NavLink>
         </Menu.Item>
         <Menu.Item className="nav-item">
-         <NavLink activeClassName="active-nav" to="/category/movies">Movies</NavLink>
+         <NavLink activeClassName="active-nav" to="/category/movies">Culture</NavLink>
         </Menu.Item>
         <Menu.Item className="nav-item">
-           <NavLink activeClassName="active-nav" to="/category/politics">Politics</NavLink>
+           <NavLink activeClassName="active-nav" to="/category/politics">Music</NavLink>
         </Menu.Item>
 	  </Menu>
  	)

@@ -7,8 +7,8 @@ import RecentArticles from '../common/RecentArticles'
 const CategoryPage = () => {
 	return(
 		<div className="content">
-			<div className="category-header">
-				<h2 className="h2-responsive category-name font-weight-bold">Category name</h2>
+			<div className="category-header sticky-top">
+				<h2 className="h2-responsive category-name font-weight-bold">Design</h2>
 				<button className="btn btn-sm btn-outline-green">Follow</button>
 			</div>
 			

@@ -6,7 +6,7 @@
  	background-blend-mode: multiply,multiply !important;
 	height: 100vh;
 	position: fixed;
-	z-index: 2;
+	z-index:1000000000;
 }
 
 
@@ -38,7 +38,6 @@
 	background-color: #020008;
 	background-image: url("https://www.transparenttextures.com/theme/images/transparent.png") !important;
 	height: 100vh !important;
-	overflow-y: scroll !important;
 	overflow-x: hidden;
 }
 

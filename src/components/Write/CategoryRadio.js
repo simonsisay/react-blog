@@ -2,79 +2,66 @@
 import React, { Component } from 'react'
 import { Input, Label } from 'mdbreact'
 
-class CategoryRadio extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      radio3: false
-    }
-  } 
-
-  onClick7 = () => {
-    this.setState({radio3: 7});
-  }
-
-  onClick8 = () => {
-    this.setState({radio3: 8});
-  }
-
-  onClick9 = () => {
-    this.setState({radio3: 9});
-  }
-
+class CategoryRadio extends Component {
+  
   render () {
     return (
 
       <div>
-        <h5 className="radio-header">Choose post category</h5>
+        <h5 className="radio-header">Choose blog category</h5>
           <div className="radio-buttons">
               <div className="radio-input">
-                  <label>Css</label>
+                  <label>Art</label>
                   <input 
-                    onClick={this.onClick7} 
-                    checked={this.state.radio3 === 7 ? true : false} 
-                   type="radio" 
-                    id="radio7" 
+                    type="radio" 
+                    name="art"
+                    value="art"
+                    checked={this.props.radioValue === 'art' ? true : false} 
+                    onChange={this.props.handleRadioChange}
                   />
               </div>
 
                <div className="radio-input">
-                  <label>Javascript</label>
+                  <label>Politics</label>
                   <input 
-                    onClick={this.onClick7} 
-                    checked={this.state.radio3 === 7 ? true : false} 
-                   type="radio" 
-                    id="radio7" 
+                    type="radio" 
+                    name="politics"
+                    value="politics"
+                    onChange={this.props.handleRadioChange}
+                    checked={this.props.radioValue === 'politics' ? true : false} 
                   />
               </div>
 
               <div className="radio-input">
-                  <label>React</label>
+                  <label>Sport</label>
                   <input 
-                    onClick={this.onClick7} 
-                    checked={this.state.radio3 === 7 ? true : false} 
-                   type="radio" 
-                    id="radio7" 
+                    type="radio" 
+                    name="sport"
+                    value="sport"
+                    checked={this.props.radioValue === 'sport' ? true : false} 
+                    onChange={this.props.handleRadioChange}
                   />
               </div>
 
                <div className="radio-input">
-                  <label>Node</label>
+                  <label>Culture</label>
                   <input 
-                    onClick={this.onClick7} 
-                    checked={this.state.radio3 === 7 ? true : false} 
-                   type="radio" 
-                    id="radio7" 
+                    type="radio" 
+                    name="culture"
+                    value="culture"
+                    checked={this.props.radioValue === 'culture' ? true : false} 
+                    onChange={this.props.handleRadioChange}
                   />
               </div>
 
                <div className="radio-input">
-                  <label>Mongo</label>
+                  <label>Music</label>
                   <input 
-                    onClick={this.onClick7} 
-                    checked={this.state.radio3 === 7 ? true : false} 
-                   type="radio" 
-                    id="radio7" 
+                    type="radio"
+                    value="music"
+                    name="music"
+                    checked={this.props.radioValue === "music" ? true : false}
+                    onChange={this.props.handleRadioChange}
                   />
               </div>
           </div>

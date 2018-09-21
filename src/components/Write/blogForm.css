@@ -1,3 +1,9 @@
+@media(min-width: 769px){
+	.image-search-input{
+		width:300px !important;
+	}
+}
+
 .blog-form-container{
 	width:70vw !important;
 	margin-left:50px;
@@ -43,4 +49,21 @@
 	padding:10px;
 	margin-bottom: 20px;
 }
+
+
+.blog-image-form-container{
+	margin:40px 0;
+}
+
+.unsplash-container{
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+
+.unsplash-image{
+	width:190px !important;
+	height: 180px !important;
+	padding:15px !important;
+}
+
 
