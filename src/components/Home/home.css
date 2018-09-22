@@ -13,6 +13,10 @@
 		justify-content: space-between;
 	}
 
+	.favourite-card{
+		margin-top:50px !important;
+	}
+
 }
 
 @media(max-width: 768px){
@@ -30,13 +34,13 @@
 
 .bookmarked-card{
 	margin-right:30px;
-	height:300px;
-	width:300px;
+	height:250px;
+	width:250px;
 	margin-top:20px;
 	margin-bottom:100px;
 	padding-top:0px;
 	overflow-y: scroll;
-	background:rgba(229, 229, 229, .2) !important;
+
 }
 
 
@@ -48,9 +52,9 @@
 }
 
 .bookmarked-title, .favourite-title{
-	padding:15px;
+	padding:10px;
 	color:#1a1a1a;
-	border-bottom:.1px solid lightgrey;
+	border-bottom:.1px solid #e0e0e0;
 }
 
 .bookmarked-recent{

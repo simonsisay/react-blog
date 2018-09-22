@@ -7,13 +7,18 @@ class Blog extends Component{
   constructor(props){
     super(props);
     this.state = {
-      bookmarked:false
+      bookmarked:false,
+      favourite:false,
     }
   }
 
 
   bookmarkArticle = () => {
     this.setState({bookmarked:!this.state.bookmarked})
+  }
+
+  addToFavourites = () => {
+    this.setState({favourite:!this.state.favourite})
   }
 
 
@@ -40,14 +45,22 @@ class Blog extends Component{
                 <h6 className="font-weight-bold mb-3">
                 <Fa icon="suitcase" className="pr-2">
                 </Fa>Food</h6>
+
+                <Fa 
+                  className="float-right"
+                  onClick={this.addToFavourites}
+                  icon="star" 
+                  size="1x"
+                  style={{color:this.state.favourite ? '#fff600' : 'gray'}}/>
               </a>
 
               <h3 className="font-weight-bold mb-3 p-0"><strong>Title of the news</strong></h3>
               <p>
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
-                sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
-                Neque porro qui dolorem ipsum quia sit amet.
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
+                  sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
+                  Neque porro qui dolorem ipsum quia sit amet.
               </p>
+              
               <p>by 
               <a>
                 <strong> Simon Sisay</strong>

@@ -17,7 +17,8 @@ class BlogWrittingForm extends Component {
 			imageUrl:'',
 			category:'',
 			imagesFromUnsplash:[],
-			imageSearch:''
+			imageSearch:'',
+			isSpinnerOpen:false
 		}
 	}
 
@@ -36,7 +37,6 @@ class BlogWrittingForm extends Component {
 	// }
 
 	handleInputChange = (event) => {
-		console.log(event.target.value)
 		this.setState({[event.target.name]: event.target.value})
 	}
 
@@ -47,10 +47,11 @@ class BlogWrittingForm extends Component {
 
 
 	getImageFormUnsplash = (query) => {
+		this.setState({isSpinnerOpen:true})
 		axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&client_id=${ApiKey}`)
 		.then(response => {
 			const sliced = response.data.results.slice(0,8)
-			this.setState({imagesFromUnsplash:sliced})
+			this.setState({imagesFromUnsplash:sliced, isSpinnerOpen:false})
 		})
 		.catch(error => {
 			console.log(error)
@@ -93,6 +94,7 @@ class BlogWrittingForm extends Component {
 		        		handleInputChange={this.handleInputChange}
 		        		imageRadioChange={this.imageRadioChange}
 		        		imageRadioValue={this.state.imageUrl}
+		        		isSpinnerOpen={this.state.isSpinnerOpen}
 		       	/>
 
 

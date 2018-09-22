@@ -17,7 +17,9 @@ class Sidebar extends Component{
 			      collapsedWidth="0"
 			    >
 			    	<div className="sidebar-header">
-						<NavLink activeClassName="active-nav" exact to="/"><h5>Home</h5></NavLink>
+						<NavLink activeClassName="active-nav" exact to="/">
+							<h5 className="h5-responsive font-weight-bold">Home</h5>
+						</NavLink>
 						<p>Blog</p>
 					</div>
 			    <div className="nav-container">

@@ -37,11 +37,12 @@ class BlogImageForm extends Component{
 					/>
 
 					<div>
-						<p>or Get get images to choose based on your title</p>
+						<p style={{paddingTop:'20px'}}>or search for random images and choose...</p>
 						<button 
 							type="button"
-							className="btn btn-green" 
-							onClick={this.openSearchBox}>
+							className="btn btn-green black-text" 
+							onClick={this.openSearchBox}
+							>
 								get images
 						</button>
 						{
@@ -53,6 +54,7 @@ class BlogImageForm extends Component{
 										name="imageSearch" 
 										value={this.props.imageSearch}  
 										onChange={this.props.handleInputChange}
+										placeholder="enter key word..."
 									/>
 									<button 
 										type="button"
@@ -64,6 +66,9 @@ class BlogImageForm extends Component{
 									>
 										Search
 									</button>
+									{
+										this.props.isSpinnerOpen ? <Fa icon="spinner" spin /> : ''
+									}
 								</div>
 
 							: ''
