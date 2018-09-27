@@ -6,19 +6,41 @@
  	return (
  		<Menu className="menu" mode='inline' >
         <Menu.Item className="nav-item">
-          <NavLink  activeClassName="active-nav" exact to="/category/design">Art</NavLink>
+           <a
+              className="active" 
+              href="/category/art">Art
+            </a>
         </Menu.Item>
         <Menu.Item className="nav-item">
-          <NavLink activeClassName="active-nav" to="/category/art">Politics</NavLink>
+          <a 
+              className="active" 
+              href="/category/politics">Politics
+            </a>
         </Menu.Item>
         <Menu.Item className="nav-item">
-          <NavLink  activeClassName="active-nav" to="/category/music">Sport</NavLink>
+          <a 
+              className="active" 
+              href="/category/sport">Sport
+            </a>
+        </Menu.Item>
+
+        <Menu.Item className="nav-item">
+         <a 
+            className="active" 
+            href="/category/culture">Culture
+          </a>
         </Menu.Item>
         <Menu.Item className="nav-item">
-         <NavLink activeClassName="active-nav" to="/category/movies">Culture</NavLink>
+           <a 
+              className="active" 
+              href="/category/music">Music
+            </a>
         </Menu.Item>
-        <Menu.Item className="nav-item">
-           <NavLink activeClassName="active-nav" to="/category/politics">Music</NavLink>
+          <Menu.Item className="nav-item">
+             <a 
+              className="active" 
+              href="/category/technology">Technology
+            </a>
         </Menu.Item>
 	  </Menu>
  	)

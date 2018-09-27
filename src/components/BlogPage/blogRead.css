@@ -6,9 +6,13 @@
 		padding-right:200px;
 	}
 
-.blogg{
-	padding-left:90px;
-}
+	.blogg{
+		padding-left:90px;
+	}
+	.blog-image{
+		width: 100% !important;
+		height:300px !important
+	}
 }
 
 

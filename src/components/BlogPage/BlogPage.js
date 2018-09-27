@@ -4,10 +4,10 @@ import './blogRead.css'
 import CommentSection from './CommentSection'
 
 
-const BlogPage = () => {
+const BlogPage = (props) => {
 	return(
 		<div className="content">
-			<BlogReadPage />
+			<BlogReadPage blogId={props.match.params.id} />
 			<CommentSection />
 		</div>
 	)

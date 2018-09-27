@@ -1,12 +1,5 @@
 @media(min-width: 769px){
 
-	.home-container .recent-articles{
-		width:120%;
-	}
-
-	.home{
-		width:60%;
-	}
 	.home-container{
 		display: flex;
 		flex-wrap: wrap;
@@ -30,8 +23,6 @@
 }
 
 
-
-
 .bookmarked-card{
 	margin-right:30px;
 	height:250px;
@@ -44,7 +35,7 @@
 }
 
 
-.trending-articles{
+.articles-list{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;

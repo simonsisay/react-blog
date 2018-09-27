@@ -64,6 +64,16 @@ class CategoryRadio extends Component {
                     onChange={this.props.handleRadioChange}
                   />
               </div>
+              <div className="radio-input">
+                  <label>Technology</label>
+                  <input 
+                    type="radio"
+                    value="technology"
+                    name="technology"
+                    checked={this.props.radioValue === "technology" ? true : false}
+                    onChange={this.props.handleRadioChange}
+                  />
+              </div>
           </div>
       </div>
     );

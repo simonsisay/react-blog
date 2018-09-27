@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Chicle|Notable');
+
 @media(max-width: 768px){
 	.content{
-		margin:10px auto !important;
+		margin:100px auto !important;
 
 	}
 }
@@ -8,10 +10,26 @@
 @media(min-width: 769px){
 	.content{
 		margin-left:250px !important;
-		margin-top:40px ;
+		margin-top:100px !important;
+		width:100% !important;
 	}
-}
+	.dropdown{
+		padding:0 10px !important;
+	}
 
+	.nav-item a{
+		border-bottom:none !important;
+	}
+
+}
+ 
+/*.content{
+	min-height: 100vh;
+}*/
+
+.spinner-icon{
+	margin:20% 50%;
+}
 body{
 	margin:0;
 	padding: 0;
@@ -19,9 +37,14 @@ body{
 	overflow-x: hidden;
 }
 
+.navbar{
+	background-color: #020008;
+	background-image: url("https://www.transparenttextures.com/theme/images/transparent.png") !important;
+}
 .main-container{
 	display: flex;
 }
+
 
 
 /* width */
@@ -36,4 +59,19 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: #686768;
   outline: 1px solid slategrey;
+}
+
+.navbar{
+	z-index:11000000000000000000000000000000000000000000000 !important;
+}
+
+
+.brandName{
+	font-family:cursive !important;
+	font-size:1.4em !important;
+	padding-left: 50px;
+}
+
+.error-message{
+	padding:30px;
 }

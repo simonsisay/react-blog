@@ -2,10 +2,10 @@ import React from 'react'
 import BlogWrittingForm from './BlogWrittingForm'
 
 
-const Write = () => {
+const Write = (props) => {
 	return(
 		<div className="content">
-			<BlogWrittingForm />
+			<BlogWrittingForm redirect={props.history}/>
 		</div>
 	)
 }

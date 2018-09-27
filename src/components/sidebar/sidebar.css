@@ -41,6 +41,10 @@
 	overflow-x: hidden;
 }
 
+.ant-layout-sider-zero-width-trigger{
+	margin-top:30px !important;
+}
+
 
 .ant-menu-light{
 	background:none !important;
@@ -71,7 +75,7 @@
 }
 
 .nav-container {
-	padding-top:40px !important;
+	padding-top:100px !important;
 }
 
 .nav-container h6{
@@ -86,7 +90,7 @@
      border-right:none !important; 
 }
 
-.active-nav{
+.active:hover{
 	font-weight: bold;
 	font-size:18px;
 }
@@ -109,4 +113,19 @@
 
 .bookmarked-articles a{
 	font-size:small;
+}
+
+.signin-btn{
+	margin-left:40px !important;
+}
+
+.signin-buttons{
+	margin-top:10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.signin-buttons button{
+	padding:5px !important;
 }

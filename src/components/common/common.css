@@ -1,5 +1,20 @@
 /********* article-card style *********/
+@media(min-width: 769px){
+	.blog-list-image{
+		width:300px !important;
+		
+	}
+	.blog-info{
+		padding-right:120px !important;
+	}
+}
 
+@media(max-width: 769px){
+	.blog-list-image{
+		width:300px !important;
+		max-height:250px !important;
+	}
+}
 
 .article-card{
 	width:250px;
@@ -38,3 +53,5 @@
 .recent-articles{
 	margin-top:50px !important;
 }
+
+

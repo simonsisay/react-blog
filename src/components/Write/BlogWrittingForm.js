@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './blogForm.css'
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import CategoryRadio from './CategoryRadio'
-import { Button } from 'mdbreact'
+import { Button, Fa } from 'mdbreact'
 import axios from 'axios'
 import ApiKey from '../../config/index'
 import ImageChoice from './imagesChoice'
@@ -22,19 +22,31 @@ class BlogWrittingForm extends Component {
 		}
 	}
 
-	// postNewBlog = () => {
-	// 	axios({
-	// 		method:'post',
-	// 		url:'',
-	// 		header:{
-	// 			a:token
-	// 		},
-	// 		data:{
-	// 			title:this.state.title,
-	// 			content:this.state.content
-	// 		}
-	// 	})
-	// }
+	postNewBlog = (e) => {
+		e.preventDefault();
+		this.setState({isSpinnerOpen:true})
+		axios({
+			method:'post',
+			url:'https://ethblogi1.herokuapp.com/api/blog/New',
+			headers:{
+				token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiJXZWQgU2VwIDI2IDIwMTggMTg6Mzg6MTMgR01UKzAwMDAgKFVUQykiLCJleHBpcmVkX2RhdGUiOiJXZWQgU2VwIDI2IDIwMTggMTg6Mzg6MTMgR01UKzAwMDAgKFVUQykiLCJpYXQiOjE1Mzc5ODcwOTN9.A1LNyl7b2x2YYGwc4iOc6-sh8G1eNVtLUIBs_uz2RiY'
+			},
+
+			data:{
+				title:this.state.title,
+				content:this.state.blog,
+				category:this.state.category,
+				image:this.state.imageUrl
+			}
+		})
+		.then(response => {
+			this.setState({blog:'', imageUrl:'', category:'', title:'', isSpinnerOpen:false})
+			this.props.redirect.push('/user');
+		})
+
+	}
+
+
 
 	handleInputChange = (event) => {
 		this.setState({[event.target.name]: event.target.value})
@@ -68,6 +80,13 @@ class BlogWrittingForm extends Component {
 	render(){
 		return(
 			<div className="blog-form-container">
+
+			{
+			this.state.isSpinnerOpen 
+			? 
+				<Fa className="spinner-icon" icon="spinner" spin size="3x"/>
+			:
+			<div>
 				<h1 className="h1-responsive font-weight-bold">
 					Write your new blog post
 				</h1>
@@ -124,9 +143,17 @@ class BlogWrittingForm extends Component {
 
 		     {/********************  Submit *********/}
 		        <div className="post-button">
-		        		<Button type="submit" color="indigo" className="post-button">Post</Button>
+		        		<Button 
+		        			type="submit" 
+		        			color="indigo" 
+		        			onClick={this.postNewBlog}
+		        			className="post-button">
+		        			Post
+		        		</Button>
 		        </div>
 		      </form>
+		   </div>
+			}
 			</div>
 		)
 	}
