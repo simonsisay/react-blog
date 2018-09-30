@@ -2,20 +2,25 @@
  import { Menu  } from 'antd'
  import { Link } from 'react-router-dom'
 import Search from '../common/Search'
+import {AuthContext} from '../../context/AuthProvider'
 
-const UserNav = () => {
+
+const UserNav = (props) => {
 	return(
-		<div className="menu">
-      <img 
-        className="avatar-img" 
-        src="https://www.ebunch.ca/wp-content/uploads/avatar-1.png" 
-        className="mx-auto d-block" alt="..." />
-      <div className="user-buttons">
-        <Link to="/user"><button className="btn btn-sm btn-secondary">Profile</button></Link>
-        <button className=" btn btn-sm btn-danger">Sign out</button>
-      </div>
-      <hr />
-      <Search />
+      <div className="menu">
+        <img 
+          className="avatar-img" 
+          src={props.image} 
+          className="mx-auto d-block" alt="..." 
+        />
+
+        <div className="user-buttons">
+          <Link to="/user"><button className="btn btn-sm btn-secondary">Profile</button></Link>
+          <button className=" btn btn-sm btn-danger">Sign out</button>
+        </div>
+
+        <hr />
+        <Search />
     </div>
 	)
 }

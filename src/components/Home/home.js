@@ -20,19 +20,18 @@ class Home extends Component {
 		axios.get('https://ethblogi1.herokuapp.com/api/blog/all')
 		.then(response => {
 			this.setState({allBlog:response.data[1].rows})
+			const latestFive = this.state.allBlog.sort((a, b) => {
+				return a.createdAt < b.createdAt ? 1 : -1
+			}).slice(0, 5)
 
-			console.log(this.state.allBlog)
-
-
-			const latestFive = this.state.allBlog.sort((a, b) => (
-				 a.createdAt < b.createdAt
-			)).slice(0, 5)
-
-			const trendingFive = this.state.allBlog.sort((a, b) => (
-				a.likes < b.likes
-			)).slice(0, 5)
+			const trendingFive = this.state.allBlog.sort((a, b) => {
+				return a.like < b.like ? 1 : -1
+			}).slice(0, 5)
 
 			this.setState({trendingArticles:trendingFive, recentArticles:latestFive})
+
+
+
 
 		}).catch(() => {
 			this.setState({errorMessage:'Something went wrong . Please refresh the page !'})

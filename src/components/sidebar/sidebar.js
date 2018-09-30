@@ -37,7 +37,9 @@ class Sidebar extends Component{
 			    <AuthContext.Consumer>
 			    {(context) => (
 			    		context.isAuthenticated ?
-			    			<UserNav/> 
+			    			<UserNav 
+			    				image={context.user.image}
+			    			/> 
 			    		: 
 			    			<button 
 				    			type="button" 

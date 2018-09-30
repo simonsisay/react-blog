@@ -12,45 +12,103 @@ class BlogPage extends Component {
       likes:0,
       comments:{},
       isSpining:false,
-      errorMessage:''
+      errorMessage:'',
+      author:'Simon Sisay',
+      favourite:false,
     }
   }
 
 
   componentDidMount(){
-    console.log(this.props.blogId)
-
     this.setState({isSpining:true})
     
     axios.get(`https://ethblogi1.herokuapp.com/api/blog/${this.props.blogId}`)
     .then(response => {
       console.log(response)
-      this.setState({blog:response.data[0].data, isSpining:false})
+      this.setState({blog:response.data[0].data, isSpining:false, likes:response.data[0].data.like, liked:false})
 
     }).catch((error) => {
       console.log(error)
       this.setState({errorMessage:'Something went wrong . Please refresh the page !'})
     })
+
+    /*********** Check if this article was added to favourites ******************/
+
+    axios({
+      method:'get',
+      url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
+      headers:{
+        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDA4OjQ5OjM2LjcyNVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE0OjQ5OjM2LjcyNVoiLCJpYXQiOjE1MzgyMTA5NzZ9.PMxq8VCt10lZMmgLzS8BPrwUA-OV2AywCz8f1141pUI'
+      }
+    })
+    .then(response => {
+      console.log(response.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 
-  likeArticle = () => {
-    this.setState({liked:!this.state.liked})
-      followCategory = () => {
+
+
+  likeOrUnlikeArticle = () => {
+
+    if(this.state.liked){
+      this.setState({liked:false, likes:this.state.likes -= 1})
         axios({
-          method:'post',
-          url:'https://ethblogi1.herokuapp.com/api/Follow/Category',
+          method:'get',
+          url:`https://ethblogi1.herokuapp.com/api/unlike/${this.props.blogId}`,
           headers:{
-            token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkxNmQyOTY4LTQ0NTgtNDJhYS1iNmY2LWQ2YWY5Y2VlMjk3OCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI1VDA5OjE3OjU1KzAwOjAwIiwiZXhwaXJlZF9kYXRlIjoiMjAxOC0wOS0yNVQxNToxNzo1NS42MjNaIiwiaWF0IjoxNTM3ODY3MDc1fQ.Qbv8l0Wn1Ye6Alh8NeTX4gXsE9YrQk0djBn0BcqDOA8'
-          },
-          data:{
-            likes:this.state.likes
+           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDA4OjQ5OjM2LjcyNVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE0OjQ5OjM2LjcyNVoiLCJpYXQiOjE1MzgyMTA5NzZ9.PMxq8VCt10lZMmgLzS8BPrwUA-OV2AywCz8f1141pUI",
           }
-        })
-        .then(response => {
-          console.log(response)
-        })
+          }).then(response => {
+            console.log(response)
+
+          }).catch(error => console.log(error))
     }
+
+    else {
+      this.setState({liked:true, likes:this.state.likes += 1})
+        axios({
+          method:'get',
+          url:`https://ethblogi1.herokuapp.com/api/Like/${this.props.blogId}`,
+          headers:{
+              token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjExOjUyLjc5OVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjExOjUyLjc5OVoiLCJpYXQiOjE1MzgyOTg3MTJ9.9JlXyM_Sut8QSbwz5-0oQPwXPOlZ2iZKA8CpcDFDrXY'
+           }})
+          .then(response => {
+            console.log(response)
+
+          }).catch(error => console.log(error))
+    }
+  } 
+
+
+  tweetBlog = () => {
+    const location = window.location.href;
+    console.log(location)
+    window.open('http://twitter.com/home?status=' + location, '', 'menubar = no, toolbar = no, resizable = yes, scrollbars = yes, height = 250, width = 800, top = 150');
   }
+
+  addToFavourites = () => {
+    this.setState({favourite:!this.state.favourite})
+      axios({
+          method:'post',
+          url:'https://ethblogi1.herokuapp.com/api/blog/Favorite',
+          headers:{
+            token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA4OjU5OjU5Ljg3MVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE0OjU5OjU5Ljg3MVoiLCJpYXQiOjE1MzgyOTc5OTl9.25YWTHYcC7QTEKA4GwObrG4S6uxjE811MQww0nNzPwo'        },
+          data:{
+            blog_id:this.props.blogId,
+            title:this.state.blog.title
+          }
+        }).then(response => {
+          console.log(response)
+
+        }).catch(error => {
+          console.log(error)
+        })
+  }
+
+
 
 
   render(){
@@ -95,15 +153,28 @@ class BlogPage extends Component {
                 <div className="likes">
                     <Fa icon="heart" 
                       style={{color:this.state.liked ? 'red' : 'gray'}}
-                      onClick={this.likeArticle}
+                      onClick={this.likeOrUnlikeArticle}
                       className="heart-icon" 
                       size="2x"
                     />
-                    <small>100</small>
+                    <small>{this.state.likes}</small>
                 </div>
 
                 <div className="twitter-icon">
-                  <Fa icon="twitter" size="2x" style={{color:'skyblue'}}/>
+                  <Fa 
+                      icon="twitter" 
+                      size="2x" 
+                      style={{color:'skyblue'}} 
+                      onClick={this.tweetBlog}
+                    />
+                  <a className="indigo-text" onClick={this.addToFavourites}>
+                    <Fa 
+                      className=""
+                      icon="star" 
+                      size="1x"
+                      style={{color:this.state.favourite ? '#fff600' : 'gray'}}/>
+                      <small>Add to favourite</small>
+                  </a>
                 </div>
 
               </div>

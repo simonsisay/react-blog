@@ -13,7 +13,11 @@ class CategoryPage extends Component {
 			blogs:[],
 			category:'',
 			spinnerOn:false,
-			errorMessage:''
+			errorMessage:'',
+			following:false,
+			trendingArticles:[],
+			recentArticles:[],
+			following:false
 		}
 	}
 
@@ -21,38 +25,96 @@ class CategoryPage extends Component {
 	componentWillMount(){
 		const category = this.props.match.params.category
 		this.setState({category:category, spinner:true})
+
+
 		axios.get(`https://ethblogi1.herokuapp.com/api/blog/all/Category/${category}`)
+
 		.then(response => {
 			this.setState({blogs:response.data[1].rows, spinner:false})
-			console.log(response.data[1].rows)
+
+		   const latestFive = this.state.blogs.sort((a, b) => {
+				return a.createdAt < b.createdAt ? 1 : -1
+			}).slice(0, 5)
+
+			const trendingFive = this.state.blogs.sort((a, b) => {
+				return a.like < b.like ? 1 : -1
+			}).slice(0, 5)
+
+			this.setState({trendingArticles:trendingFive, recentArticles:latestFive})
+
+
 		}).catch(error => {
 			console.log(error)
 			this.setState({errorMessage:'Something went wrong . Please refresh the page !'})
 		})
+
+		axios({
+			method:'post',
+			url:'https:ethblogi1.herokuapp.com/api/Check/Category',
+			headers:{
+             token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjIwOjUwLjkyNloiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjIwOjUwLjkyNloiLCJpYXQiOjE1MzgyOTkyNTB9.Nd8_l47EInei9Byw3_FYwcJpOn2m_qgtJaxKpjRhL58'
+			},
+			data:{
+				category:category
+			}
+		})
+		.then(response => {
+			console.log(response)
+			this.setState({following:response.data.following === 0 ? false : true})
+
+		}).catch(error => console.log(error))
+
 	}
 
-	followCategory = () => {
-				axios({
-					method:'post',
-					url:'https://ethblogi1.herokuapp.com/api/Follow/Category',
-					headers:{
-						token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkxNmQyOTY4LTQ0NTgtNDJhYS1iNmY2LWQ2YWY5Y2VlMjk3OCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI1VDA5OjE3OjU1KzAwOjAwIiwiZXhwaXJlZF9kYXRlIjoiMjAxOC0wOS0yNVQxNToxNzo1NS42MjNaIiwiaWF0IjoxNTM3ODY3MDc1fQ.Qbv8l0Wn1Ye6Alh8NeTX4gXsE9YrQk0djBn0BcqDOA8'
-					},
-					data:{
-						category:this.state.category
-					}
-				})
-				.then(response => {
-					console.log(response)
-				})
+
+
+	FollowOrUnfollowCategory = () => {
+		this.setState({following: !this.state.following})
+		if(this.state.following){
+			axios({
+			method:'delete',
+			url:'https://ethblogi1.herokuapp.com/api/Unfollow/Category',
+			headers:{
+        		 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDA4OjQ5OjM2LjcyNVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE0OjQ5OjM2LjcyNVoiLCJpYXQiOjE1MzgyMTA5NzZ9.PMxq8VCt10lZMmgLzS8BPrwUA-OV2AywCz8f1141pUI",
+			},
+			data:{
+				category:this.state.category
+			}
+		})
+			.then(response => {
+				console.log(response)
+			}).catch(e=>console.log(e))
+		}
+
+		else {
+			axios({
+				method:'post',
+				url:'https://ethblogi1.herokuapp.com/api/Follow/Category',
+				headers:{
+	        		 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDA4OjQ5OjM2LjcyNVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE0OjQ5OjM2LjcyNVoiLCJpYXQiOjE1MzgyMTA5NzZ9.PMxq8VCt10lZMmgLzS8BPrwUA-OV2AywCz8f1141pUI",
+				},
+				data:{
+					category:this.state.category
+				}
+			})
+			.then(response => {
+				console.log(response)
+			}).catch(e => console.log(e))
+		}
 	}
+
+
 
 	render(){
 		return(
 			<div className="content">
 				<div className="category-header sticky-top">
 					<h2 className="h2-responsive category-name font-weight-bold">{this.state.category.toUpperCase()}</h2>
-					<button className="btn btn-sm btn-outline-green" onClick={this.followCategory}>Follow</button>
+					<button 
+						className="btn btn-sm btn-outline-green" 
+						onClick={this.FollowOrUnfollowCategory}>
+							{this.state.following ? 'Unfollow' : 'Follow'}
+					</button>
 				</div>
 				{  
 					this.state.errorMessage 
@@ -67,7 +129,13 @@ class CategoryPage extends Component {
 					?
 						 <h4>No article written in this category</h4>
 					:
-						<ArticleList blogs={this.state.blogs} /> 	
+						<div>
+							<h4 className="h5-responsive font-weight-bold text-center">Trending</h4>
+							<ArticleList blogs={this.state.trendingArticles} /> 	
+
+							<h4 className="h5-responsive font-weight-bold">Recent</h4>
+							<ArticleList blogs={this.state.recentArticles} /> 
+						</div>
 				}
 			</div>
 		)

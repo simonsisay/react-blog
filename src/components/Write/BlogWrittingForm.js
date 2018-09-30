@@ -18,7 +18,8 @@ class BlogWrittingForm extends Component {
 			category:'',
 			imagesFromUnsplash:[],
 			imageSearch:'',
-			isSpinnerOpen:false
+			isSpinnerOpen:false,
+			imageSpinner:false
 		}
 	}
 
@@ -29,9 +30,8 @@ class BlogWrittingForm extends Component {
 			method:'post',
 			url:'https://ethblogi1.herokuapp.com/api/blog/New',
 			headers:{
-				token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiJXZWQgU2VwIDI2IDIwMTggMTg6Mzg6MTMgR01UKzAwMDAgKFVUQykiLCJleHBpcmVkX2RhdGUiOiJXZWQgU2VwIDI2IDIwMTggMTg6Mzg6MTMgR01UKzAwMDAgKFVUQykiLCJpYXQiOjE1Mzc5ODcwOTN9.A1LNyl7b2x2YYGwc4iOc6-sh8G1eNVtLUIBs_uz2RiY'
+				token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDEyOjIyOjA1Ljc2NFoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE4OjIyOjA1Ljc2NFoiLCJpYXQiOjE1MzgyMjM3MjV9.Uf54LputoRjrlZLy-SZ-F3kvGhtTwC2XtrONyPDamp8',
 			},
-
 			data:{
 				title:this.state.title,
 				content:this.state.blog,
@@ -59,11 +59,11 @@ class BlogWrittingForm extends Component {
 
 
 	getImageFormUnsplash = (query) => {
-		this.setState({isSpinnerOpen:true})
+		this.setState({imageSpinner:true})
 		axios.get(`https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&client_id=${ApiKey}`)
 		.then(response => {
 			const sliced = response.data.results.slice(0,8)
-			this.setState({imagesFromUnsplash:sliced, isSpinnerOpen:false})
+			this.setState({imagesFromUnsplash:sliced, imageSpinner:false})
 		})
 		.catch(error => {
 			console.log(error)
@@ -113,7 +113,7 @@ class BlogWrittingForm extends Component {
 		        		handleInputChange={this.handleInputChange}
 		        		imageRadioChange={this.imageRadioChange}
 		        		imageRadioValue={this.state.imageUrl}
-		        		isSpinnerOpen={this.state.isSpinnerOpen}
+		        		isSpinnerOpen={this.state.imageSpinner}
 		       	/>
 
 

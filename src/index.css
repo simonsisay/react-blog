@@ -75,3 +75,10 @@ body::-webkit-scrollbar-thumb {
 .error-message{
 	padding:30px;
 }
+
+.nav-dropdown-list{
+	display: flex;
+	justify-content:space-between;
+	align-items: center;
+	padding-right:5px;
+}

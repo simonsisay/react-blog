@@ -15,6 +15,7 @@ const ArticleList = (props) => {
 							blog={blog.content}
 							createdAt={blog.createdAt}
 							id={blog.id}
+							userId={blog.user_id}
 					/>
 				))}
 		</div>
