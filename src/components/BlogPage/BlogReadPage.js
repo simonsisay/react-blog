@@ -38,11 +38,18 @@ class BlogPage extends Component {
       method:'get',
       url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
       headers:{
-        token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDA4OjQ5OjM2LjcyNVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE0OjQ5OjM2LjcyNVoiLCJpYXQiOjE1MzgyMTA5NzZ9.PMxq8VCt10lZMmgLzS8BPrwUA-OV2AywCz8f1141pUI'
+         token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjIwOjUwLjkyNloiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjIwOjUwLjkyNloiLCJpYXQiOjE1MzgyOTkyNTB9.Nd8_l47EInei9Byw3_FYwcJpOn2m_qgtJaxKpjRhL58'
       }
     })
     .then(response => {
-      console.log(response.data)
+      console.log(response.data[1].rows)
+      response.data[1].rows.map(item => {
+        if(item.blog_id === this.props.blogId){
+          this.setState({favourite:true})
+        }
+        else 
+          return item
+      })
     })
     .catch(error => {
       console.log(error)
@@ -88,6 +95,8 @@ class BlogPage extends Component {
     console.log(location)
     window.open('http://twitter.com/home?status=' + location, '', 'menubar = no, toolbar = no, resizable = yes, scrollbars = yes, height = 250, width = 800, top = 150');
   }
+
+
 
   addToFavourites = () => {
     this.setState({favourite:!this.state.favourite})
@@ -167,14 +176,21 @@ class BlogPage extends Component {
                       style={{color:'skyblue'}} 
                       onClick={this.tweetBlog}
                     />
+
+                  {
+                  this.state.favourite 
+                  ? 
+                    <p> Saved to favourite </p> 
+                  :  
                   <a className="indigo-text" onClick={this.addToFavourites}>
                     <Fa 
                       className=""
                       icon="star" 
                       size="1x"
-                      style={{color:this.state.favourite ? '#fff600' : 'gray'}}/>
+                    />
                       <small>Add to favourite</small>
                   </a>
+                }
                 </div>
 
               </div>
