@@ -80,9 +80,16 @@ class Blog extends Component{
               </p>
 
               <p>by 
-                <a>
+                <Link to={{
+                  pathname:`/user/simonsisay`,
+                  state:{
+                    /*id:this.props.userId*/
+                    id:'3wwsef34w543w53'
+                  }
+                }}
+                >
                   <strong> Simon Sisay </strong>
-                </a>
+                </Link>
               </p>
               <p>{formatted}</p>
 

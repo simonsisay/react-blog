@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Menu } from 'antd'
 import { DropDownItem } from 'mdbreact'
 
- const CategoriesNav = () => {
- 	return (
- 		<Menu className="menu" mode='inline' >
+class CategoriesNav extends Component {
+    render(){
+       return (
+    <Menu className="menu" mode='inline' >
         <Menu.Item className="nav-item">
            <a
               className="active" 
@@ -42,8 +43,9 @@ import { DropDownItem } from 'mdbreact'
               href="/category/technology">Technology
             </a>
         </Menu.Item>
-	  </Menu>
- 	)
+    </Menu>
+  )
+    }
  }
 
  export default  CategoriesNav

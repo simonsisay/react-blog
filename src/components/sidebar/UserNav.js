@@ -1,7 +1,7 @@
- import React from 'react' 
- import { Menu  } from 'antd'
- import { Link } from 'react-router-dom'
-import {AuthContext} from '../../context/AuthProvider'
+import React from 'react' 
+import { Menu  } from 'antd'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthProvider'
 
 
 const UserNav = (props) => {
@@ -14,18 +14,22 @@ const UserNav = (props) => {
         />
 
         <div className="user-buttons">
-          <Link 
-            to={{
-              pathname:'/user',
-              state:{
-                ownAccount:true
-              }
-            }}
-          >
-            <button className="btn btn-sm btn-secondary">
-              Profile
-            </button>
-          </Link>
+          <AuthContext.Consumer>
+          {(context) => (
+              <Link to={{
+                pathname:`/user/${context.user.full_name.replace(' ', '')}`,
+                state:{
+                  ownAccount:true,
+                  id:context.user.id
+                }
+              }}
+              >
+              <button className="btn btn-sm btn-secondary">
+                Profile
+              </button>
+             </Link>
+            )}
+        </AuthContext.Consumer>
           <button className=" btn btn-sm btn-danger">Sign out</button>
         </div>
 
