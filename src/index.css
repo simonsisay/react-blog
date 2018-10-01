@@ -82,3 +82,7 @@ body::-webkit-scrollbar-thumb {
 	align-items: center;
 	padding-right:5px;
 }
+
+.favourite-dropdown{
+	margin-left:20px !important;
+}

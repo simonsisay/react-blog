@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Fa, Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider'
 import axios from 'axios'
+
 
 
 class NavbarTop extends React.Component {
@@ -29,8 +30,7 @@ class NavbarTop extends React.Component {
             method:'get',
             url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
             headers:{
-                token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjIwOjUwLjkyNloiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjIwOjUwLjkyNloiLCJpYXQiOjE1MzgyOTkyNTB9.Nd8_l47EInei9Byw3_FYwcJpOn2m_qgtJaxKpjRhL58'
-            },
+                token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDA3OjQ0OjUxLjgzM1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAxVDEzOjQ0OjUxLjgzM1oiLCJpYXQiOjE1MzgzNzk4OTF9.zyIWsw7BGLimvkm56-zrR-giAFIkXJ8SdfAkvnH9fQk'            },
         })
         .then(response => {
             console.log(response)
@@ -44,8 +44,7 @@ class NavbarTop extends React.Component {
             method:'get',
             url:'https://ethblogi1.herokuapp.com/api/blog/get/readLater',
             headers:{
-                token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjIwOjUwLjkyNloiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjIwOjUwLjkyNloiLCJpYXQiOjE1MzgyOTkyNTB9.Nd8_l47EInei9Byw3_FYwcJpOn2m_qgtJaxKpjRhL58'
-            },
+                token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDA3OjQ0OjUxLjgzM1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAxVDEzOjQ0OjUxLjgzM1oiLCJpYXQiOjE1MzgzNzk4OTF9.zyIWsw7BGLimvkm56-zrR-giAFIkXJ8SdfAkvnH9fQk'            },
         })
         .then(response => {
             console.log(response)
@@ -61,8 +60,7 @@ class NavbarTop extends React.Component {
             method:'delete',
             url:`https://ethblogi1.herokuapp.com/api/blog/Delete/Favorite/${id}`,
             headers:{
-                token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjIwOjUwLjkyNloiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjIwOjUwLjkyNloiLCJpYXQiOjE1MzgyOTkyNTB9.Nd8_l47EInei9Byw3_FYwcJpOn2m_qgtJaxKpjRhL58'
-            }
+                token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDA3OjQ0OjUxLjgzM1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAxVDEzOjQ0OjUxLjgzM1oiLCJpYXQiOjE1MzgzNzk4OTF9.zyIWsw7BGLimvkm56-zrR-giAFIkXJ8SdfAkvnH9fQk'            }
         })
         .then(response => {
             console.log(response)
@@ -116,11 +114,17 @@ class NavbarTop extends React.Component {
                                 ? 
                                     <Fa icon="spinner" spin size="2x" />
                                 :
+                                this.state.readLater.length === 0
+                                 ? 
+                                    <p className="text-center">List is empty</p>
+                                :
                                     this.state.readLater.map(item => (
-                                        <div className="nav-dropdown-list" key={item.id}>
-                                            <DropdownItem href="#" >{item.title}</DropdownItem>
-                                            <Fa icon="close" onClick={() => this.deleteBookMarked(item.id)}/>
-                                        </div>
+                                           <div className="nav-dropdown-list" key={item.id}>
+                                             <DropdownItem href={`/blog/${item.blog_id}`} >
+                                                {item.title}
+                                             </DropdownItem>
+                                             <Fa icon="close" onClick={() => this.deleteBookMarked(item.id)}/>
+                                          </div>
                                     ))
                                 }
                                 </DropdownMenu>
@@ -133,15 +137,21 @@ class NavbarTop extends React.Component {
                                     Favourites
                                 </DropdownToggle>
 
-                                 <DropdownMenu>
+                                 <DropdownMenu className="favourite-dropdown">
                                  {this.state.spinner 
                                 ? 
                                     <Fa icon="spinner" spin size="2x" />
                                 :
+                                this.state.favourite.length === 0
+                                 ? 
+                                    <p className="text-center">List is empty</p>
+                                 :
                                     this.state.favourite.map(item => (
                                         <div className="nav-dropdown-list" key={item.id}>
-                                             <DropdownItem href="#" >{item.title}</DropdownItem>
-                                             <Fa icon="close" onClick={() => this.deleteFavourite(item.id)}/>
+                                             <DropdownItem href={`/blog/${item.blog_id}`} >
+                                                {item.title}
+                                             </DropdownItem>
+                                              <Fa icon="close" onClick={() => this.deleteFavourite(item.id)}/>
                                         </div>
                                     ))
                                 }

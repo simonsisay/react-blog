@@ -6,8 +6,16 @@ class UserPage extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-
+			ownAccount:false,
 		}
+	}
+
+	componentDidMount(){
+	   console.log(this.props.location)
+		// if(this.props.location.state.ownAccount){
+		// 	this.setState({ownAccount:true})
+		// }
+		// console.log(this.state.sownAccount)
 	}
 
 	render(){

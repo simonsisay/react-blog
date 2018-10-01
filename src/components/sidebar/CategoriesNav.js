@@ -1,6 +1,6 @@
- import React from 'react'
- import { Menu } from 'antd'
- import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { Menu } from 'antd'
+import { DropDownItem } from 'mdbreact'
 
  const CategoriesNav = () => {
  	return (
@@ -31,7 +31,7 @@
           </a>
         </Menu.Item>
         <Menu.Item className="nav-item">
-           <a 
+           <a
               className="active" 
               href="/category/music">Music
             </a>
