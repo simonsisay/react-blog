@@ -3,7 +3,6 @@ import { Layout} from 'antd';
 import './sidebar.css'
 import UserNav from './UserNav'
 import CategoriesNav from './CategoriesNav'
-import { NavLink } from 'react-router-dom'
 import SignInUser from './SignInUser'
 import { AuthContext } from '../../context/AuthProvider'
 import Search from './Search'
@@ -18,7 +17,7 @@ class Sidebar extends Component{
 			toggleSigninOptions:false,
 			searchInput:'',
 			searchResult:[],
-			searchSpinner:false
+			searchSpinner:false,
 		}
 	}
 
@@ -32,11 +31,14 @@ class Sidebar extends Component{
 		this.setState({searchSpinner:true})
 		axios.get(`https://ethblogi1.herokuapp.com/api/blog/all/Title/${this.state.searchInput}`)
 		.then(response => {
-			console.log('search', response)
 			this.setState({
 				searchResult:response.data[1].rows,
-				searchSpinner:false
+				searchSpinner:false,
+				searchInput:''
 			})
+		})
+		.catch(error => {
+			this.setState({searchSpinner:false})
 		})
 	}
 

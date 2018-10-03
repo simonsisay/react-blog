@@ -9,7 +9,11 @@ class ImageChoice extends Component {
         {this.props.images.map(image => (
            <div className="image-radio-input" key={image.id}>
               <label>
-                <img className="unsplash-image" src={image.urls.regular} />
+                <img 
+                className="unsplash-image" 
+                  src={image.urls.regular} 
+                  alt={image.urls.regular}
+                />
               </label>
               <input 
                 type="radio" 

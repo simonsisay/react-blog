@@ -3,9 +3,6 @@ import queryString from 'query-string'
 import { Fa } from 'mdbreact'
 
 class SignIn extends Component{
-	constructor(props){
-		super(props)
-	}
 
 	componentDidMount(){
 		console.log(this.props)

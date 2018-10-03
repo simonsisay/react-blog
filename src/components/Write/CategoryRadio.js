@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Input, Label } from 'mdbreact'
+// import { Input, Label } from 'mdbreact'
 
 class CategoryRadio extends Component {
   

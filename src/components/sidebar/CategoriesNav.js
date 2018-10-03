@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu } from 'antd'
-import { DropDownItem } from 'mdbreact'
+
 
 class CategoriesNav extends Component {
     render(){

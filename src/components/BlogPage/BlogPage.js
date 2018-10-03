@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import BlogReadPage from './BlogReadPage'
+import { AuthContext }  from '../../context/AuthProvider'
 import './blogRead.css'
-import CommentSection from './CommentSection'
+
 
 
 class BlogPage extends Component {
@@ -18,7 +19,15 @@ class BlogPage extends Component {
 	render(){
 		return(
 			<div className="content blog-read-content">
-				<BlogReadPage blogId={this.props.match.params.id} />
+				<AuthContext.Consumer>
+				{(context) => (
+					<BlogReadPage 
+						isAuth={context.isAuthenticated}
+						blogId={this.props.match.params.id} 
+					/>
+				 )
+				}
+				</AuthContext.Consumer>
 			</div>
 		)
 	}

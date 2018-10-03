@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import Blog from '../common/Blog'
 import "./category.css"
 import ArticleList from '../common/articleList'
 import axios from 'axios'
 import { Fa } from 'mdbreact'
-
+import { AuthContext } from '../../context/AuthProvider'
 
 class CategoryPage extends Component {
 	constructor(props){
@@ -17,12 +16,11 @@ class CategoryPage extends Component {
 			following:false,
 			trendingArticles:[],
 			recentArticles:[],
-			following:false
 		}
 	}
 
 
-	componentWillMount(){
+	componentDidMount(){
 		const category = this.props.match.params.category
 		this.setState({category:category, spinner:true})
 
@@ -109,13 +107,21 @@ class CategoryPage extends Component {
 		return(
 			<div className="content">
 				<div className="category-header sticky-top">
-					<h2 className="h2-responsive category-name font-weight-bold">{this.state.category.toUpperCase()}</h2>
+				<h2 className="h2-responsive category-name font-weight-bold">{this.state.category.toUpperCase()}</h2>
+			<AuthContext.Consumer>
+			{context => 
+				context.isAuthenticated 
+				? 	
 					<button 
 						className="btn btn-sm btn-outline-green" 
 						onClick={this.FollowOrUnfollowCategory}>
 							{this.state.following ? 'Unfollow' : 'Follow'}
 					</button>
-				</div>
+			: 
+				''
+			}
+			</AuthContext.Consumer>
+			</div>
 				{  
 					this.state.errorMessage 
 				? 
@@ -125,15 +131,15 @@ class CategoryPage extends Component {
 					? 
 						<Fa className="spinner-icon" icon="spinner" spin size="3x" />
 					:  
-					this.state.blogs.length == 0 
+					this.state.blogs.length === 0 
 					?
 						 <h4>No article written in this category</h4>
 					:
 						<div>
-							<h4 className="h5-responsive font-weight-bold text-center">Trending</h4>
+							<h4 className="h5-responsive font-weight-bold pl-2">Trending</h4>
 							<ArticleList blogs={this.state.trendingArticles} /> 	
 
-							<h4 className="h5-responsive font-weight-bold">Recent</h4>
+							<h4 className="h5-responsive font-weight-bold pl-2">Recent</h4>
 							<ArticleList blogs={this.state.recentArticles} /> 
 						</div>
 				}

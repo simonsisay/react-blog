@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardBody, Mask, Fa, View, Button} from 'mdbreact';
+import { Container, Row, Col, Card, CardBody, Mask, Fa, View } from 'mdbreact';
 import axios from 'axios'
 import moment from 'moment'
 import BlogFooter from './BlogFooter'
@@ -12,7 +12,7 @@ class BlogPage extends Component {
       liked:false,
       blog:{},
       likes:0,
-      comments:{},
+      comments:[],
       isSpining:false,
       errorMessage:'',
       author:'Simon Sisay',
@@ -27,8 +27,12 @@ class BlogPage extends Component {
     
     axios.get(`https://ethblogi1.herokuapp.com/api/blog/${this.props.blogId}`)
     .then(response => {
-      console.log(response)
-      this.setState({blog:response.data[0].data, isSpining:false, likes:response.data[0].data.like, liked:false})
+      this.setState({
+          blog:response.data[0].data, 
+          isSpining:false, likes:response.data[0].data.like, 
+          liked:false,
+          comments:response.data[2].comments.rows
+      })
 
     }).catch((error) => {
       console.log(error)
@@ -45,13 +49,10 @@ class BlogPage extends Component {
       }
     })
     .then(response => {
-      console.log(response.data[1].rows)
-      response.data[1].rows.map(item => {
+      response.data[1].rows.forEach(item => {
         if(item.blog_id === this.props.blogId){
           this.setState({favourite:true})
         }
-        else 
-          return item
       })
     })
     .catch(error => {
@@ -69,7 +70,10 @@ class BlogPage extends Component {
   likeOrUnlikeArticle = () => {
 
     if(this.state.liked){
-      this.setState({liked:false, likes:this.state.likes -= 1})
+      this.setState({
+        liked:false, 
+        likes:this.state.likes -= 1
+    })
         axios({
           method:'get',
           url:`https://ethblogi1.herokuapp.com/api/unlike/${this.props.blogId}`,
@@ -83,7 +87,10 @@ class BlogPage extends Component {
     }
 
     else {
-      this.setState({liked:true, likes:this.state.likes += 1})
+      this.setState({
+        liked:true, 
+        likes:this.state.likes += 1
+      })
         axios({
           method:'get',
           url:`https://ethblogi1.herokuapp.com/api/Like/${this.props.blogId}`,
@@ -100,7 +107,6 @@ class BlogPage extends Component {
 
   tweetBlog = () => {
     const location = window.location.href;
-    console.log(location)
     window.open('http://twitter.com/home?status=' + location, '', 'menubar = no, toolbar = no, resizable = yes, scrollbars = yes, height = 250, width = 800, top = 150');
   }
 
@@ -118,7 +124,6 @@ class BlogPage extends Component {
             title:this.state.blog.title
           }
         }).then(response => {
-          console.log(response)
 
         }).catch(error => {
           console.log(error)
@@ -145,8 +150,11 @@ class BlogPage extends Component {
                 <Card reverse>
 
                     <View cascade hover waves>
-                        <img src={this.state.blog.image} 
-                          className="img-fluid blog-image"/>
+                        <img 
+                          src={this.state.blog.image} 
+                          className="img-fluid blog-image"
+                          alt={this.state.title}
+                          />
                         
                         <Mask overlay="white-slight" className="waves-light"/>
                     </View>
@@ -167,18 +175,20 @@ class BlogPage extends Component {
             </Row>
 
              <BlogFooter 
-              likes={this.state.likes}
-              likeOrUnlikeArticle={this.likeOrUnlikeArticle}
-              toggleComment={this.toggleComment}
-              tweetBlog={this.tweetBlog}
-              favourite={this.state.favourite}
-              addToFavourites={this.addToFavourites}
-              liked={this.state.liked}
+
+                likes={this.state.likes}
+                likeOrUnlikeArticle={this.likeOrUnlikeArticle}
+                toggleComment={this.toggleComment}
+                tweetBlog={this.tweetBlog}
+                favourite={this.state.favourite}
+                addToFavourites={this.addToFavourites}
+                liked={this.state.liked}
              />
              <CommentSection 
                 openComment={this.state.openComment}
                 blogId={this.props.blogId}
                 userId={this.state.blog.user_id}
+                comments={this.state.comments}
              />
             </Container>
       )

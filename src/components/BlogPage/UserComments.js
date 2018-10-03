@@ -1,31 +1,42 @@
 import React, { Component } from 'react'
 import { Card, CardBody, CardHeader } from 'mdbreact'
 
-class UserComments extends Component{
-	render(){
+const UserComments = (props) => {
+
 		return(
-			<div className="user-comments-container">
+		 	<div className="user-comments-container">
+		 	{		 	
+		 	props.comments.length === 0
+		 	? 
+		 		<h5>no comments on this post yet . </h5>
+		 	:
+		 	props.comments.map(comment => 
+		    <div>
 				<h6 className="font-weight-bold mb-2">Comments</h6>
 				<Card className="news">
 	              <CardHeader className="label cardHeader">
-	                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(18)-mini.jpg" className="rounded-circle z-depth-1-half"/>
+	                <img 
+		                src={comment.image} 
+		                className="rounded-circle z-depth-1-half"
+		                alt='comment'
+	               	/>
 	                  <div className="comment-name">
-		                  <a className="name">Lili Rose</a> 
-		                  <span className="date">2 days ago</span>
+		                  <a className="name">{comment.user}</a> 
+		                  <span className="date">{comment.createdAt}</span>
 		               </div>
 	                </CardHeader>
 
 	               <CardBody>
 		                <div className="added-text">
-		                	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero inventore, 
-		                	iste quas libero eius? Vitae sint neque animi alias sunt dolor, accusantium 
-		                	ducimus, non placeat voluptate.
+		                	{comment.comment}
 		                </div>
 		             </CardBody>
 	            </Card>
+	         </div>
+		 	)
+	      }
 			</div>
 		)
-	}
 }
 
 export default UserComments

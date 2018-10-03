@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Fa, Card, Badge} from 'mdbreact';
+import {Fa, Badge} from 'mdbreact';
 import './user.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -52,7 +52,7 @@ class UserInfo extends Component{
 			}).then(response => {
 				console.log(response)
 				this.setState({
-					isFollowing:response.data.following == 0 ? false : true
+					isFollowing:response.data.following === 0 ? false : true
 				})
 			})
 

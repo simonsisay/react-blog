@@ -1,16 +1,16 @@
 import React from 'react' 
-import { Menu  } from 'antd'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthProvider'
 
 
 const UserNav = (props) => {
+
 	return(
       <div className="menu">
         <img 
-          className="avatar-img" 
+          className="avatar-img mx-auto d-block" 
           src={props.image} 
-          className="mx-auto d-block" alt="..." 
+          alt="user pic" 
         />
 
         <div className="user-buttons">
@@ -24,9 +24,14 @@ const UserNav = (props) => {
                 }
               }}
               >
-              <button className="btn btn-sm btn-secondary">
+              <a href={`/user/${context.user.full_name.replace(' ', '')}`}>
+              <button 
+                onClick={() =>  window.location.reload()}
+                className="btn btn-sm btn-secondary" 
+                >
                 Profile
               </button>
+              </a>
              </Link>
             )}
         </AuthContext.Consumer>

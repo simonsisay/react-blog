@@ -8,17 +8,22 @@ const SearchList = (props) => {
 		{
 			props.searchSpinner 
 			? 
-				<Fa icon="Spinner" spin className="spiner-icon" size="1x" />
+				<Fa icon="spinner" spin className="search-spiner-icon text-center white-text" size="2x" />
 			:
-			props.searchResult.map(item => (
-				<div key={item.user_id}>
-					<hr color="white"/>
-					<Link to={`/blog/${item.blog_id}`} >
-						<p className="text-center white-text"> {item.title} </p>
-					</Link>
-					<hr color="white"/>
-				</div>
-			))
+				props.searchResult.length === 0 
+
+				? 
+					<p className="text-center">No result found</p> 
+				:
+					props.searchResult.map(item => (
+						<div key={item.id}>
+							<hr color="white"/>
+							<a href={`/blog/${item.id}`} >
+								<p className="text-center white-text"> {item.title} </p>
+							</a>
+							<hr color="white"/>
+						</div>
+					))
 		}
 		</div>
 	)

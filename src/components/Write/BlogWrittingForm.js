@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import './blogForm.css'
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { FormGroup, Label, Input} from 'reactstrap';
 import CategoryRadio from './CategoryRadio'
 import { Button, Fa } from 'mdbreact'
 import axios from 'axios'
 import ApiKey from '../../config/index'
-import ImageChoice from './imagesChoice'
+
 import BlogImageForm from './blogImageForm'
 
 class BlogWrittingForm extends Component {

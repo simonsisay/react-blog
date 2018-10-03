@@ -11,6 +11,7 @@ class UserPageContainer extends Component {
 				<UserPage 
 					user={context.user}
 					otherId={this.props.location.state.id}
+					isAuth={context.isAuthenticated}
 				/>
 			)}
 			</AuthContext.Consumer>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import UserInfo from './UserInfo'
 import ArticlesByUser from './ArticlesByUser'
 import axios from 'axios'
-import { Fa } from 'mdbreact'
+// import { Fa } from 'mdbreact'
 
 class UserPage extends Component{
 	constructor(props){
@@ -20,19 +20,19 @@ class UserPage extends Component{
 	componentDidMount(){
 		this.setState({isSpinning:true})
 
-		let userId
+		let userId;
 
-		if(this.props.user.id === this.props.otherId){
+		if(this.props.isAuth && this.props.user.id === this.props.otherId){
 			this.setState({
 				ownAccount:true, 
 			})
 			userId = this.props.user.id
 		}
-		else {
-			this.setState({
-				ownAccount:false, 
-			})
-			userId = this.props.user.id
+		else if(!this.props.isAuth || this.props.user.id !== this.props.otherId){
+				this.setState({
+					ownAccount:false, 
+				})
+			userId = this.props.otherId
 		}
 
 		axios.get(`https://ethblogi1.herokuapp.com/api/blog/User/${userId}`)

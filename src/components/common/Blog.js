@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Mask, Fa, View, Button} from 'mdbreact';
+import { Container, Row, Col, Fa, Button} from 'mdbreact';
 import './common.css'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
@@ -36,12 +36,6 @@ class Blog extends Component{
   }
 
 
-
-
-
-
-
-
   render(){
 
     let slicedText;
@@ -52,7 +46,7 @@ class Blog extends Component{
       slicedText = `${this.props.blog}...`;
     }
 
-    let formatted = moment(this.props.blog.createdAt).format('D MMMM YYYY');
+    let formatted = moment(this.props.createdAt).format('D MMMM YYYY');
 
     return(
       <Container>
@@ -61,7 +55,7 @@ class Blog extends Component{
           <Col lg="4">
               <img className="img-fluid blog-image blog-list-image" 
                   src={this.props.image} 
-                  alt="Sample image"
+                  alt={this.props.title}
                 />
           </Col>
 
@@ -96,12 +90,17 @@ class Blog extends Component{
 
               <div className="blog-read-and-bookmark">
                   <Link to={`/blog/${this.props.id}`}>
-                      <Button color="indigo" size="md" className="waves-light ">
+                      <Button 
+                        color="indigo" size="md" 
+                        className="waves-light "
+                      >
                         Read more
                        </Button>
                   </Link>
-
-                <div className="bookmark">
+              {
+              this.props.isAuth 
+              ? 
+                 <div className="bookmark">
                   <Fa 
                     className="float-right mr-5 bookmark-icon" 
                     onClick={this.bookmarkArticle}
@@ -110,6 +109,9 @@ class Blog extends Component{
                   />
                   <small className="float-right mr-5">read later</small>
                 </div>
+              : 
+                ''
+              }
               </div>
 
           </Col>
