@@ -13,12 +13,26 @@
 		width: 100% !important;
 		height:300px !important
 	}
+	.user-comments-container{
+		max-width:40vw;
+		margin:30px auto;
+	}
+	.comment-form{
+		max-width:40vw;
+		margin:50px auto;
+	}
 }
+
+
+/*@media(max-width: 768px){
+
+}*/
 
 
 .blog-read-page{
 	max-width: 90% !important;
 	margin:auto !important;
+	margin-bottom: 0 !important
 }
 
 .heart-icon, .twitter-icon{
@@ -37,4 +51,35 @@
 .twitter-icon{
 	display: flex;
 	flex-direction: column;
+}
+
+
+
+.comment-icon{
+	color:rgba(62, 69, 81, 0.4);
+	margin-left:20px;
+
+}
+
+
+
+.blog-read-content{
+	padding-bottom:50px !important;
+}
+
+.comment-avatar{
+	width:30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.cardHeader{
+	display: flex;
+	padding:0 !important;
+}
+
+.comment-name{
+	display: flex;
+	flex-direction: column;
+	margin-left: 5px
 }

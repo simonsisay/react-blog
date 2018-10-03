@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Card, CardBody, Mask, Fa, View, Button} from 'mdbreact';
 import axios from 'axios'
 import moment from 'moment'
+import BlogFooter from './BlogFooter'
+import CommentSection from './CommentSection'
 
 class BlogPage extends Component {
   constructor(props){
@@ -15,6 +17,7 @@ class BlogPage extends Component {
       errorMessage:'',
       author:'Simon Sisay',
       favourite:false,
+      openComment:false
     }
   }
 
@@ -38,7 +41,7 @@ class BlogPage extends Component {
       method:'get',
       url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
       headers:{
-         token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjIwOjUwLjkyNloiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjIwOjUwLjkyNloiLCJpYXQiOjE1MzgyOTkyNTB9.Nd8_l47EInei9Byw3_FYwcJpOn2m_qgtJaxKpjRhL58'
+          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
       }
     })
     .then(response => {
@@ -56,6 +59,11 @@ class BlogPage extends Component {
     })
   }
 
+
+
+  toggleComment = () => {
+    this.setState({openComment:!this.state.openComment})
+  }
 
 
   likeOrUnlikeArticle = () => {
@@ -158,43 +166,20 @@ class BlogPage extends Component {
               </Col>
             </Row>
 
-            <div className="article-footer">
-                <div className="likes">
-                    <Fa icon="heart" 
-                      style={{color:this.state.liked ? 'red' : 'gray'}}
-                      onClick={this.likeOrUnlikeArticle}
-                      className="heart-icon" 
-                      size="2x"
-                    />
-                    <small>{this.state.likes}</small>
-                </div>
-
-                <div className="twitter-icon">
-                  <Fa 
-                      icon="twitter" 
-                      size="2x" 
-                      style={{color:'skyblue'}} 
-                      onClick={this.tweetBlog}
-                    />
-
-                  {
-                  this.state.favourite 
-                  ? 
-                    <p> Saved to favourite </p> 
-                  :  
-                  <a className="indigo-text" onClick={this.addToFavourites}>
-                    <Fa 
-                      className=""
-                      icon="star" 
-                      size="1x"
-                    />
-                      <small>Add to favourite</small>
-                  </a>
-                }
-                </div>
-
-              </div>
-              <hr className="mb-5 mt-4"/>
+             <BlogFooter 
+              likes={this.state.likes}
+              likeOrUnlikeArticle={this.likeOrUnlikeArticle}
+              toggleComment={this.toggleComment}
+              tweetBlog={this.tweetBlog}
+              favourite={this.state.favourite}
+              addToFavourites={this.addToFavourites}
+              liked={this.state.liked}
+             />
+             <CommentSection 
+                openComment={this.state.openComment}
+                blogId={this.props.blogId}
+                userId={this.state.blog.user_id}
+             />
             </Container>
       )
    }

@@ -7,6 +7,8 @@ import UserPageContainer from '../components/UserProfile/UserPageContainer'
 import BlogPage from '../components/BlogPage/BlogPage'
 import Sidebar from '../components/sidebar/sidebar'
 import NavbarTop from '../components/navbar/Navbar'
+import { AuthContext } from '../context/AuthProvider'
+import SignInContainer from '../components/SignInContainer'
 
 
 class Routes extends Component{
@@ -14,16 +16,21 @@ class Routes extends Component{
       return(
           <Router>
              <div>
-                 <NavbarTop />
+
+                  <NavbarTop />
+
                    <div className="main-container">
-                   <Sidebar />
-                   <Switch className="content">
-                     <Route path="/" component={Home} exact />
-                     <Route path="/write" component={Write} />
-                     <Route path="/category/:category" exact component={CategoryPage} />
-                     <Route path="/user/:name" component={UserPageContainer} />
-                     <Route path="/blog/:id" component={BlogPage} />
-                   </Switch>
+                       <Sidebar />
+
+                       <Switch className="content">
+                         <Route path="/" component={Home} exact />
+                         <Route path="/write" component={Write} />
+                         <Route path="/category/:category" component={CategoryPage} />
+                         <Route path="/user/:name" component={UserPageContainer } />
+                         <Route path="/blog/:id" component={BlogPage} />
+                         <Route path="/sign-in" component={SignInContainer}  />
+                       </Switch>
+
                  </div>
                </div>
           </Router>

@@ -15,7 +15,7 @@ const ArticlesByUser = (props) => {
 					<h2>{props.errorMessage}</h2>
 				:
 					<div>
-						<h3>Posts by {props.fullName}</h3>
+						<p>Articles</p>
 						<hr />
 						<ArticleList 
 							blogs={props.articleList}

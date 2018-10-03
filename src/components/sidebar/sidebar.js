@@ -17,7 +17,8 @@ class Sidebar extends Component{
 		this.state = {
 			toggleSigninOptions:false,
 			searchInput:'',
-			searchResult:[]
+			searchResult:[],
+			searchSpinner:false
 		}
 	}
 
@@ -28,10 +29,14 @@ class Sidebar extends Component{
 
 	getSearchResult = (e) => {
 		e.preventDefault();
+		this.setState({searchSpinner:true})
 		axios.get(`https://ethblogi1.herokuapp.com/api/blog/all/Title/${this.state.searchInput}`)
 		.then(response => {
-			console.log(response)
-			this.setState({searchResult:response.data[1].rows})
+			console.log('search', response)
+			this.setState({
+				searchResult:response.data[1].rows,
+				searchSpinner:false
+			})
 		})
 	}
 
@@ -81,10 +86,15 @@ class Sidebar extends Component{
 					<Search 
 						handleInputChange={this.handleSearchChange}
 						value={this.state.searchInput}
+						getSearchResult={this.getSearchResult}
 					/>
 					{this.state.searchResult.length !== 0 
 					?
-						<SearchList searchResult={this.state.searchResult} search={this.getSearchResult}/>
+						<SearchList 
+							searchResult={this.state.searchResult} 
+							search={this.getSearchResult}
+							searchSpinner={this.state.searchSpinner}
+						/>
 					: ''
 					}
 				</div>

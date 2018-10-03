@@ -17,7 +17,7 @@ class UserPage extends Component{
 		}
 	}
 
-	componentWillMount(){
+	componentDidMount(){
 		this.setState({isSpinning:true})
 
 		let userId
@@ -61,11 +61,16 @@ class UserPage extends Component{
 							ownAccount={this.state.ownAccount}
 							user={this.state.userInfo}
 							/>
+					{
+					 this.state.errorMessage 
+					 ? <h3 className="error-message">{this.state.errorMessage}</h3>
+					 :
 						<ArticlesByUser 
 							articleList={this.state.articlesByUser}
 							fullName={this.state.userInfo.full_name}
 							errorMessage={this.state.errorMessage}
 						/>
+					}
 				</div>
 			)
 	}

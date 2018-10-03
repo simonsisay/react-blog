@@ -17,33 +17,33 @@ class UserInfo extends Component{
 	}
 
 
-	componentWillMount(){
-		// axios.get({
-		// 	method:'get',
-		// 	url:`https://ethblogi1.herokuapp.com/api/User/Follower`,
-		// 	data:{
-		// 		followed_id:this.props.user.id
-		// 	}
-		// }).then(response => {
-		// 	console.log(response)
-		// }).catch(error => {
-		// 	console.log(error)
-		// })
+	componentDidMount(){
+		axios.get({
+			method:'get',
+			url:`https://ethblogi1.herokuapp.com/api/User/Follower`,
+			data:{
+				followed_id:this.props.user.id
+			}
+		}).then(response => {
+			console.log('followers' ,response)
+		}).catch(error => {
+			console.log(error)
+		})
 
-		// axios.get({
-		// 	method:'get',
-		// 	url:`https://ethblogi1.herokuapp.com/api/Following/User`,
-		// }).then(response => {
-		// 	console.log(response)
-		// }).catch(error => {
-		// 	console.log(error)
-		// })
+		axios.get({
+			method:'get',
+			url:`https://ethblogi1.herokuapp.com/api/Following/User`,
+		}).then(response => {
+			console.log('following', response)
+		}).catch(error => {
+			console.log(error)
+		})
 
 			axios({
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Check/User',
 				headers:{
-					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDA3OjQ0OjUxLjgzM1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAxVDEzOjQ0OjUxLjgzM1oiLCJpYXQiOjE1MzgzNzk4OTF9.zyIWsw7BGLimvkm56-zrR-giAFIkXJ8SdfAkvnH9fQk',
+					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
 				},
 				data:{
 					followed_id:this.props.user.id
@@ -68,7 +68,7 @@ class UserInfo extends Component{
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Follow/User',
 				headers:{
-					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDA3OjQ0OjUxLjgzM1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAxVDEzOjQ0OjUxLjgzM1oiLCJpYXQiOjE1MzgzNzk4OTF9.zyIWsw7BGLimvkm56-zrR-giAFIkXJ8SdfAkvnH9fQk',
+					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
 				},
 				data:{
 					followed_id:this.props.user.id
@@ -85,7 +85,7 @@ class UserInfo extends Component{
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Unfollow/User',
 				headers:{
-					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDA3OjQ0OjUxLjgzM1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAxVDEzOjQ0OjUxLjgzM1oiLCJpYXQiOjE1MzgzNzk4OTF9.zyIWsw7BGLimvkm56-zrR-giAFIkXJ8SdfAkvnH9fQk',
+					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
 				},
 				data:{
 					followed_id:this.props.user.id
@@ -101,30 +101,35 @@ class UserInfo extends Component{
 	  return(
 		  		<div className="user-info">
 		  			<div className="follow">
-		  				<h2>{this.props.user.full_name}</h2>
-
+		  				<div className="user-name-email">
+			  				<h2>{this.props.user.full_name}</h2>
+			  				<small>
+			  					{this.props.user.email}
+			  				</small>
+			  			</div>
 		  				<div className="badges">
 		  					<div>
-				  				<Badge className="badge" color="blue-grey">Followers 2</Badge>
-				  				<Badge className="badge" color="blue-grey">Following 19</Badge>
+				  				<Badge color="blue-grey">Followers 2</Badge>
+				  				<Badge color="blue-grey">Following 19</Badge>
 				  			</div>
 				  			{this.props.ownAccount 
 				  			? 
 				  				''
 				  			:
 				  				<div>	
-				  					<button 
-				  						className="btn btn-outline-blue btn-sm" 
-				  						color="blue-grey"
+				  					<Badge 
+				  						style={{cursor:'pointer'}}
+				  						className="badge" 
+				  						color="green"
 				  						onClick={this.followOrUnFollowUser}
 				  					>
 				  					{this.state.isFollowing 
 				  					? 
-				  						'UnFollow' 
+				  						'Following' 
 				  					:
 				  						'Follow'
 				  					}
-				  				</button>
+				  				</Badge>
 				  				</div>
 			  				}
 			  			</div>
