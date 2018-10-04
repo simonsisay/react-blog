@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardBody, CardHeader } from 'mdbreact'
+import { Card, CardBody, CardHeader, Fa } from 'mdbreact'
 
 const UserComments = (props) => {
 
@@ -11,8 +11,7 @@ const UserComments = (props) => {
 		 		<h5>no comments on this post yet . </h5>
 		 	:
 		 	props.comments.map(comment => 
-		    <div>
-				<h6 className="font-weight-bold mb-2">Comments</h6>
+		    <div key={comment.id}>
 				<Card className="news">
 	              <CardHeader className="label cardHeader">
 	                <img 
@@ -21,14 +20,18 @@ const UserComments = (props) => {
 		                alt='comment'
 	               	/>
 	                  <div className="comment-name">
-		                  <a className="name">{comment.user}</a> 
-		                  <span className="date">{comment.createdAt}</span>
+		                  <a className="name">{comment.name}</a> 
+		                  <small className="date">{comment.createdAt}</small>
 		               </div>
+		               <Fa 
+			               icon="trash" color="red" 
+			               onClick={() => props.deleteComment(comment.id)}
+			             />
 	                </CardHeader>
 
 	               <CardBody>
 		                <div className="added-text">
-		                	{comment.comment}
+		                	{comment.comments}
 		                </div>
 		             </CardBody>
 	            </Card>

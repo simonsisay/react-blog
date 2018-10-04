@@ -7,35 +7,21 @@ import axios from 'axios'
 
 
 class CommentSection extends Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			newComment:'',
-		}
-	}
 
-
-
-	handleInputChange = (e) => {
-		this.setState({newComment:e.target.value})
-	}
-
-	addNewComment = () => {
-		console.log(this.props.token)
+	deleteComment = (id) => {
+		console.log('deleting ', id)
 		axios({
-			method:'post',
-			url:'https://ethblogi1.herokuapp.com/api/feedback/New',
+			method:'delete',
+			url:`https://ethblogi1.herokuapp.com/api/feedback//Delete/${id}`,
 			headers:{
 				authorization:this.props.token
-			},
-			data:{
-				blog_id:this.props.blogId,
-				comments:this.state.newComment,
-				user_id:this.props.userId
 			}
-		}).then(response => {
-			console.log('comment', response)
-			this.setState({newComment:''})
+		})
+		.then(response => {
+			console.log(response)
+		})
+		.catch(error => {
+			console.log(error)
 		})
 	}
 
@@ -52,18 +38,18 @@ class CommentSection extends Component{
 						<CardHeader>
 							<div className="label">
 									<img 
-									src="https://bootdey.com/img/Content/avatar/avatar6.png" 
+									src={this.props.user.image} 
 									className="comment-avatar" 
 									alt="user pic"
 								   />
-									<a className="name">Simon Sisay</a>
+									<a className="name">{this.props.user.full_name}</a>
 							</div>
 						</CardHeader>
 			          <Input 
 			       			className="textarea-form" 
 			       			type="textarea" 
 			       			name="blog" 
-			       			value={this.state.newComment}
+			       			value={this.props.newComment}
 			       			onChange={this.handleInputChange}
 			       			rows="4"
 			       			cols="4"
@@ -71,7 +57,7 @@ class CommentSection extends Component{
 			          		required
 			          	/>
 			          	<button 
-			          		onClick={this.addNewComment}
+			          		onClick={this.props.addNewComment}
 			          		className="btn btn-sm btn-green">
 			          		Comment
 			          	</button>
@@ -79,7 +65,10 @@ class CommentSection extends Component{
 				: 
 					''
 			 }
-				<UserComments comments={this.props.comments}/>
+				<UserComments
+					 deleteComment ={this.deleteComment}
+					comments={this.props.comments}
+					addNewComment={this.props.addNewComment}/>
 			</div>
 
 		)

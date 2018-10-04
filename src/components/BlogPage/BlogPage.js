@@ -25,6 +25,7 @@ class BlogPage extends Component {
 						isAuth={context.isAuthenticated}
 						blogId={this.props.match.params.id} 
 						token={context.token}
+						user={context.user}
 					/>
 				 )
 				}

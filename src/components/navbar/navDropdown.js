@@ -8,14 +8,13 @@ class NavDropDown extends Component{
  	constructor(props){
  		super(props);
  		this.state = {
- 			isSpinning:false,
- 		   readLater:[],
-         favourite:[],
+ 		isSpinning:false,
+ 		readLater:[],
+        favourite:[],
  		}
  	}
 
 	getBookmarked = () => {
-		console.log(this.props.token)
         this.setState({isSpinning:true})
         axios({
             method:'get',
@@ -26,6 +25,9 @@ class NavDropDown extends Component{
         .then(response => {
             console.log(response)
             this.setState({readLater:response.data[1].rows, isSpinning:false})
+        })
+        .catch(error => {
+            console.log(error)
         })
     }
 
@@ -40,6 +42,9 @@ class NavDropDown extends Component{
         .then(response => {
             console.log(response)
             this.setState({favourite:response.data[1].rows, isSpinning:false})
+        })
+        .catch(error => {
+            console.log(error)
         })
     }
 
@@ -97,9 +102,10 @@ class NavDropDown extends Component{
                         </DropdownToggle>
 
                         <DropdownMenu>
-                         {this.state.spinner 
+                         {
+                        this.state.isSpinning 
                         ? 
-                            <Fa icon="spinner" spin size="2x" />
+                            <Fa icon="spinner" spin size="2x" className="spinner-icon"/>
                         :
                         this.state.readLater.length === 0
                          ? 
@@ -125,9 +131,10 @@ class NavDropDown extends Component{
                         </DropdownToggle>
 
                          <DropdownMenu className="favourite-dropdown">
-                         {this.state.spinner 
+                         {
+                        this.state.isSpinning 
                         ? 
-                            <Fa icon="spinner" spin size="2x" />
+                            <Fa icon="spinner" spin size="2x" className="spinner-icon"/>
                         :
                         this.state.favourite.length === 0
                          ? 

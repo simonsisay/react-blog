@@ -17,7 +17,8 @@ class BlogPage extends Component {
       errorMessage:'',
       author:'Simon Sisay',
       favourite:false,
-      openComment:false
+      openComment:false,
+      newComment:''
     }
   }
 
@@ -27,6 +28,7 @@ class BlogPage extends Component {
     
     axios.get(`https://ethblogi1.herokuapp.com/api/blog/${this.props.blogId}`)
     .then(response => {
+      console.log(response.data[2].comments.rows)
       this.setState({
           blog:response.data[0].data, 
           isSpining:false, likes:response.data[0].data.like, 
@@ -45,7 +47,7 @@ class BlogPage extends Component {
       method:'get',
       url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
       headers:{
-        token:this.props.token
+        authorization:this.props.token
       }
     })
     .then(response => {
@@ -60,6 +62,29 @@ class BlogPage extends Component {
     })
   }
 
+  addNewComment = () => {
+    axios({
+      method:'post',
+      url:'https://ethblogi1.herokuapp.com/api/feedback/New',
+      headers:{
+        authorization:this.props.token
+      },
+      data:{
+        blog_id:this.props.blogId,
+        comments:this.state.newComment,
+        user_id:this.props.userId
+      }
+    }).then(response => {
+      console.log(response)
+      this.setState({comments:[...this.state.comments, response.data[0]]})
+      this.setState({newComment:''})
+    })
+  }
+
+
+  handleInputChange = (e) => {
+    this.setState({newComment:e.target.value})
+  }
 
 
   toggleComment = () => {
@@ -78,7 +103,7 @@ class BlogPage extends Component {
           method:'get',
           url:`https://ethblogi1.herokuapp.com/api/unlike/${this.props.blogId}`,
           headers:{
-            token:this.props.token
+            authorization:this.props.token
           }
           }).then(response => {
             console.log(response)
@@ -95,7 +120,7 @@ class BlogPage extends Component {
           method:'get',
           url:`https://ethblogi1.herokuapp.com/api/Like/${this.props.blogId}`,
           headers:{
-            token:this.props.token
+            authorization:this.props.token
            }})
           .then(response => {
             console.log(response)
@@ -118,7 +143,7 @@ class BlogPage extends Component {
           method:'post',
           url:'https://ethblogi1.herokuapp.com/api/blog/Favorite',
           headers:{
-            token:this.props.token
+            authorization:this.props.token
          },
           data:{
             blog_id:this.props.blogId,
@@ -192,6 +217,8 @@ class BlogPage extends Component {
                 userId={this.state.blog.user_id}
                 comments={this.state.comments}
                 token={this.props.token}
+                user={this.props.user}
+                addNewComment={this.addNewComment}
              />
             </Container>
       )
