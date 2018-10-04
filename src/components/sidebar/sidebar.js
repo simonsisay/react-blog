@@ -66,6 +66,7 @@ class Sidebar extends Component{
 			    		context.isAuthenticated ?
 			    			<UserNav 
 			    				image={context.user.image}
+			    				signOut={context.signOut}
 			    			/> 
 			    		: 
 			    			<button 

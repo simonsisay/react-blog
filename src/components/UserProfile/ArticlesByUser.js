@@ -1,5 +1,5 @@
 import React from 'react'
-import ArticleList from '../common/articleList'
+import UserBlogList from './UserBlogList'
 import { Fa } from 'mdbreact'
 
 const ArticlesByUser = (props) => {
@@ -8,7 +8,7 @@ const ArticlesByUser = (props) => {
 			{
 			 props.articleList.length === 0 
 			? 
-				<Fa icon="spinner" spin size="2x" className="spinner-icon"/> 
+				<p>{props.fullName} has not written any articles yet</p>
 			: 
 				props.errorMessage 
 				? 	
@@ -17,8 +17,10 @@ const ArticlesByUser = (props) => {
 					<div>
 						<p>Articles</p>
 						<hr />
-						<ArticleList 
+						<UserBlogList 
 							blogs={props.articleList}
+							userName={props.fullName}
+							userId={props.userId}
 						/>
 					</div>
 			}

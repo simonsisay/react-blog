@@ -21,11 +21,12 @@ class CommentSection extends Component{
 	}
 
 	addNewComment = () => {
+		console.log(this.props.token)
 		axios({
 			method:'post',
 			url:'https://ethblogi1.herokuapp.com/api/feedback/New',
 			headers:{
-				token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAxVDIyOjIzOjIzLjQ3MFoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDA0OjIzOjIzLjQ3MFoiLCJpYXQiOjE1Mzg0MzI2MDN9.pegHk9nyy6k9a6la615Ng2_IYKOCjUFZArst1we2hu4'
+				authorization:this.props.token
 			},
 			data:{
 				blog_id:this.props.blogId,
@@ -33,7 +34,7 @@ class CommentSection extends Component{
 				user_id:this.props.userId
 			}
 		}).then(response => {
-			console.log(response)
+			console.log('comment', response)
 			this.setState({newComment:''})
 		})
 	}

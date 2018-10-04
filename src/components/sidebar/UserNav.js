@@ -16,26 +16,29 @@ const UserNav = (props) => {
         <div className="user-buttons">
           <AuthContext.Consumer>
           {(context) => (
-              <Link to={{
-                pathname:`/user/${context.user.full_name.replace(' ', '')}`,
-                state:{
-                  ownAccount:true,
-                  id:context.user.id
-                }
-              }}
-              >
-              <a href={`/user/${context.user.full_name.replace(' ', '')}`}>
-              <button 
-                onClick={() =>  window.location.reload()}
-                className="btn btn-sm btn-secondary" 
+            <React.Fragment>
+                <Link to={{
+                  pathname:`/user/${context.user.full_name.replace(' ', '')}`,
+                  state:{
+                    ownAccount:true,
+                    id:context.user.facebook_id || context.user.id
+                  }
+                }}
                 >
-                Profile
-              </button>
-              </a>
-             </Link>
+                <button 
+                  className="btn btn-sm btn-secondary" 
+                  >
+                  Profile
+                </button>
+               </Link>
+               <button 
+                  className=" btn btn-sm btn-danger"
+                  onClick={context.signOut}
+                  >Sign out
+                </button>
+            </React.Fragment>
             )}
         </AuthContext.Consumer>
-          <button className=" btn btn-sm btn-danger">Sign out</button>
         </div>
 
         <hr />

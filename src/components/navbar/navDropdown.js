@@ -21,7 +21,7 @@ class NavDropDown extends Component{
             method:'get',
             url:'https://ethblogi1.herokuapp.com/api/blog/get/readLater',
             headers:{
-            	token:this.props.token
+            	authorization:this.props.token
         }})
         .then(response => {
             console.log(response)
@@ -35,7 +35,7 @@ class NavDropDown extends Component{
             method:'get',
             url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
             headers:{
-            	token:this.props.token
+            	authorization:this.props.token
         }})
         .then(response => {
             console.log(response)

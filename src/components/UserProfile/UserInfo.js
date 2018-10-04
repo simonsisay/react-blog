@@ -17,47 +17,58 @@ class UserInfo extends Component{
 	}
 
 
-	componentDidMount(){
-		axios.get({
-			method:'get',
-			url:`https://ethblogi1.herokuapp.com/api/User/Follower`,
-			data:{
-				followed_id:this.props.user.id
-			}
-		}).then(response => {
-			console.log('followers' ,response)
-		}).catch(error => {
-			console.log(error)
-		})
+	// componentDidMount(){
+	// 	axios.get({
+	// 		method:'post',
+	// 		url:`https://ethblogi1.herokuapp.com/api/User/Followers`,
+	// 		headers:{
+	// 			authorization:this.props.token
+	// 		},
+	// 		data:{
+	// 			followed_id:this.props.userId
+	// 		},
+	// 	})
+	// 	.then(response => {
+	// 		console.log('followers' ,response)
+	// 	}).catch(error => {
+	// 		console.log('followers', error)
+	// 	})
+	// }
 
-		axios.get({
-			method:'get',
-			url:`https://ethblogi1.herokuapp.com/api/Following/User`,
-		}).then(response => {
-			console.log('following', response)
-		}).catch(error => {
-			console.log(error)
-		})
-
-			axios({
-				method:'post',
-				url:'https://ethblogi1.herokuapp.com/api/Check/User',
-				headers:{
-					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
-				},
-				data:{
-					followed_id:this.props.user.id
-				}
-
-			}).then(response => {
-				console.log(response)
-				this.setState({
-					isFollowing:response.data.following === 0 ? false : true
-				})
-			})
+	// 	// axios.get({
+	// 	// 	method:'get',
+	// 	// 	url:`https://ethblogi1.herokuapp.com/api/Following/User`,
+	// 	// 	headers:{
+	// 	// 		authorization:this.props.token
+	// 	// 	},
+	// 	// })
+	// 	// .then(response => {
+	// 	// 	console.log('following', response)
+	// 	// })
+	// 	// .catch(error => {
+	// 	// 	console.log("following", error)
+	// 	// })
 
 
-	}
+	// 	if(!this.props.ownAccount){
+	// 		axios({
+	// 			method:'post',
+	// 			url:'https://ethblogi1.herokuapp.com/api/Check/User',
+	// 			headers:{
+	// 				authorization:this.props.token
+	// 			},
+	// 			data:{
+	// 				followed_id:this.props.userId
+	// 			}
+
+	// 		})
+	// 		.then(response => {
+	// 			this.setState({
+	// 				isFollowing:response.data.following === 0 ? false : true,
+	// 			})
+	// 		})
+	// 	}
+	// }
 
 
 	followOrUnFollowUser = () => {
@@ -68,10 +79,10 @@ class UserInfo extends Component{
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Follow/User',
 				headers:{
-					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
+					authorization:this.props.token
 				},
 				data:{
-					followed_id:this.props.user.id
+					followed_id:this.props.userId
 				}
 
 			}).then(response => {
@@ -85,10 +96,10 @@ class UserInfo extends Component{
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Unfollow/User',
 				headers:{
-					token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
+					authorization:this.props.token
 				},
 				data:{
-					followed_id:this.props.user.id
+					followed_id:this.props.userId
 				}
 
 			}).then(response => {
@@ -102,15 +113,12 @@ class UserInfo extends Component{
 		  		<div className="user-info">
 		  			<div className="follow">
 		  				<div className="user-name-email">
-			  				<h2>{this.props.user.full_name}</h2>
-			  				<small>
-			  					{this.props.user.email}
-			  				</small>
+			  				<h2>{this.props.userName}</h2>
 			  			</div>
 		  				<div className="badges">
 		  					<div>
-				  				<Badge color="blue-grey">Followers 2</Badge>
-				  				<Badge color="blue-grey">Following 19</Badge>
+				  				<Badge color="blue-grey">Followers {this.state.followers}</Badge>
+				  				<Badge color="blue-grey">Following {this.state.following}</Badge>
 				  			</div>
 				  			{this.props.ownAccount 
 				  			? 
@@ -138,9 +146,9 @@ class UserInfo extends Component{
 
 		  			 <div className="avatar-and-button">
 				        <img 
-				        		src={this.props.user.image} 
+				        		src={this.props.userImage} 
 				        		className="rounded user-avatar img-fluid" 
-				        		alt={this.props.user.full_name}
+				        		alt={this.props.userImage}
 				        	/>
 				        {
 				        	this.props.ownAccount

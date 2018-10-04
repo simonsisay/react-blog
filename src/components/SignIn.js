@@ -14,8 +14,8 @@ class SignIn extends Component{
 
 		localStorage.setItem("token", data.authorization)
 		this.props.signIn();
+		console.log(data.authorization)
 		this.props.redirect('/')
-
 		//console.log(localStorage.setItem('token', data.authorization)
 	}
 

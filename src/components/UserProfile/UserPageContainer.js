@@ -3,15 +3,23 @@ import {AuthContext} from '../../context/AuthProvider'
 import UserPage from './UserPage'
 
 class UserPageContainer extends Component {
+
+	componentWillReceiveProps(nextProps){
+		if(this.props.location.pathname !== nextProps.location.pathname){
+			window.location.reload();
+		}
+	}
+
+
 	render(){
-		console.log(this.props.location.state.id)
 		return(
 			<AuthContext.Consumer>
 			{(context) => (
 				<UserPage 
 					user={context.user}
-					otherId={this.props.location.state.id}
+					otherId={this.props.location.state.id} 
 					isAuth={context.isAuthenticated}
+					token={context.token}
 				/>
 			)}
 			</AuthContext.Consumer>

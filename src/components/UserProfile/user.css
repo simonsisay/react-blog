@@ -14,7 +14,6 @@
 .user-info{
 	display: flex;
 	justify-content: space-around;
-	padding-bottom:20px;
 }
 
 .user-info img{
@@ -39,7 +38,7 @@
 }
 
 .articles-by-user{
-	margin-top:80px;
+	margin-top:40px;
 }
 .articles-by-user h3{
 	padding-left:10px;

@@ -15,14 +15,13 @@ class Blog extends Component{
   }
 
 
-
   bookmarkArticle = () => {
     this.setState({bookmarked:!this.state.bookmarked})
     axios({
       method:'post',
       url:'https://ethblogi1.herokuapp.com/api/blog/readLater',
       headers:{
-          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
+        authorization:this.props.token
      },
       data:{
         title:this.props.title,
@@ -76,14 +75,13 @@ class Blog extends Component{
 
               <p>by 
                 <Link to={{
-                  pathname:`/user/simonsisay`,
+                  pathname:`/user/${this.props.writer.replace(' ', '')}`,
                   state:{
-                    /*id:this.props.userId*/
-                    id:'3wwsef34w543w53'
+                    id:this.props.userId
                   }
                 }}
                 >
-                  <strong> Simon Sisay </strong>
+                  <strong> {this.props.writer}</strong>
                 </Link>
               </p>
               <p>{formatted}</p>

@@ -45,7 +45,7 @@ class BlogPage extends Component {
       method:'get',
       url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
       headers:{
-          token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTEwLTAyVDA5OjE1OjA3LjYzN1oiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTEwLTAyVDE1OjE1OjA3LjYzN1oiLCJpYXQiOjE1Mzg0NzE3MDd9.lP2UpZQjrTXsyhSs-8QXito2AlSKGZDC5NQPhVs3VVQ',
+        token:this.props.token
       }
     })
     .then(response => {
@@ -78,7 +78,7 @@ class BlogPage extends Component {
           method:'get',
           url:`https://ethblogi1.herokuapp.com/api/unlike/${this.props.blogId}`,
           headers:{
-           token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTI5VDA4OjQ5OjM2LjcyNVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTI5VDE0OjQ5OjM2LjcyNVoiLCJpYXQiOjE1MzgyMTA5NzZ9.PMxq8VCt10lZMmgLzS8BPrwUA-OV2AywCz8f1141pUI",
+            token:this.props.token
           }
           }).then(response => {
             console.log(response)
@@ -95,7 +95,7 @@ class BlogPage extends Component {
           method:'get',
           url:`https://ethblogi1.herokuapp.com/api/Like/${this.props.blogId}`,
           headers:{
-              token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA5OjExOjUyLjc5OVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE1OjExOjUyLjc5OVoiLCJpYXQiOjE1MzgyOTg3MTJ9.9JlXyM_Sut8QSbwz5-0oQPwXPOlZ2iZKA8CpcDFDrXY'
+            token:this.props.token
            }})
           .then(response => {
             console.log(response)
@@ -118,7 +118,8 @@ class BlogPage extends Component {
           method:'post',
           url:'https://ethblogi1.herokuapp.com/api/blog/Favorite',
           headers:{
-            token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQxNTFkNjFjLWFlYWQtNDRjNC1hYTY1LTcwY2NhMzNjMTljNCIsImdvb2dsZV9pZCI6IjExMTE1NTQ3MzM0MTk3MzQwODk3NiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL2xoNC5nb29nbGV1c2VyY29udGVudC5jb20vLUNJRjRKbXhrZkw0L0FBQUFBQUFBQUFJL0FBQUFBQUFBQUFjL0c2RDhrajV3YlVvL3Bob3RvLmpwZz9zej01MCIsImVtYWlsIjoic2ltb25zaXNheTlAZ21haWwuY29tIiwiaXNzdWVkX2RhdGUiOiIyMDE4LTA5LTMwVDA4OjU5OjU5Ljg3MVoiLCJleHBpcmVkX2RhdGUiOiIyMDE4LTA5LTMwVDE0OjU5OjU5Ljg3MVoiLCJpYXQiOjE1MzgyOTc5OTl9.25YWTHYcC7QTEKA4GwObrG4S6uxjE811MQww0nNzPwo'        },
+            token:this.props.token
+         },
           data:{
             blog_id:this.props.blogId,
             title:this.state.blog.title
@@ -183,12 +184,14 @@ class BlogPage extends Component {
                 favourite={this.state.favourite}
                 addToFavourites={this.addToFavourites}
                 liked={this.state.liked}
+                isAuth={this.props.isAuth}
              />
              <CommentSection 
                 openComment={this.state.openComment}
                 blogId={this.props.blogId}
                 userId={this.state.blog.user_id}
                 comments={this.state.comments}
+                token={this.props.token}
              />
             </Container>
       )
