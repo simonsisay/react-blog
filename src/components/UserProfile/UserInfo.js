@@ -17,7 +17,7 @@ class UserInfo extends Component{
 	}
 
 
-	// componentDidMount(){
+	componentDidMount(){
 	// 	axios.get({
 	// 		method:'post',
 	// 		url:`https://ethblogi1.herokuapp.com/api/User/Followers`,
@@ -35,40 +35,40 @@ class UserInfo extends Component{
 	// 	})
 	// }
 
-	// 	// axios.get({
-	// 	// 	method:'get',
-	// 	// 	url:`https://ethblogi1.herokuapp.com/api/Following/User`,
-	// 	// 	headers:{
-	// 	// 		authorization:this.props.token
-	// 	// 	},
-	// 	// })
-	// 	// .then(response => {
-	// 	// 	console.log('following', response)
-	// 	// })
-	// 	// .catch(error => {
-	// 	// 	console.log("following", error)
-	// 	// })
+		axios.get({
+			method:'get',
+			url:'https://ethblogi1.herokuapp.com/api/Following/User',
+			headers:{
+				authorization:this.props.token
+			},
+		})
+		.then(response => {
+			console.log('following', response)
+		})
+		.catch(error => {
+			// console.log("following", error)
+		})
 
 
-	// 	if(!this.props.ownAccount){
-	// 		axios({
-	// 			method:'post',
-	// 			url:'https://ethblogi1.herokuapp.com/api/Check/User',
-	// 			headers:{
-	// 				authorization:this.props.token
-	// 			},
-	// 			data:{
-	// 				followed_id:this.props.userId
-	// 			}
+		if(!this.props.ownAccount){
+			axios({
+				method:'post',
+				url:'https://ethblogi1.herokuapp.com/api/Check/User',
+				headers:{
+					authorization:this.props.token
+				},
+				data:{
+					followed_id:this.props.userId
+				}
 
-	// 		})
-	// 		.then(response => {
-	// 			this.setState({
-	// 				isFollowing:response.data.following === 0 ? false : true,
-	// 			})
-	// 		})
-	// 	}
-	// }
+			})
+			.then(response => {
+				this.setState({
+					isFollowing:response.data.following === 0 ? false : true,
+				})
+			})
+		}
+	}
 
 
 	followOrUnFollowUser = () => {
