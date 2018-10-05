@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-// import axios from 'axios'
 import jwt from 'jsonwebtoken'
 
 export const AuthContext = React.createContext();
-
-
 
 
 export class AuthProvider extends Component{
@@ -19,7 +16,6 @@ export class AuthProvider extends Component{
 
 	componentWillMount(){
 		const token = localStorage.getItem("token");
-		// const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ5OWE4NTRmLTE1YzUtNDc1Yi1hMWFhLWI3YTVjYzE4NThjZiIsImZ1bGxfbmFtZSI6IlNpbW9uIFNpc2F5IiwiaW1hZ2UiOiJodHRwczovL3BsYXRmb3JtLWxvb2thc2lkZS5mYnNieC5jb20vcGxhdGZvcm0vcHJvZmlsZXBpYy8_YXNpZD0yNTEzMzY3NDIzOTEyNjImaGVpZ2h0PTUwJndpZHRoPTUwJmV4dD0xNTQxMjM4NDE5Jmhhc2g9QWVURFpzdmFsdnNLVk9CSCIsImVtYWlsIjoibnVsbCIsImlzc3VlZF9kYXRlIjoiMjAxOC0xMC0wNFQwOTo0NzowMC4yOTBaIiwiZXhwaXJlZF9kYXRlIjoiMjAxOC0xMC0xMVQwOTo0NzowMC4yOTBaIiwiaWF0IjoxNTM4NjQ2NDIwfQ.uBKBCRzQzhA9xbS0qSrutmwo8XlCd-Vh7dI1dj1T2c8"
 		this.setState({
 				user:jwt.decode(token), 
 				isAuthenticated:token ? true : false, 

@@ -39,22 +39,31 @@ class UserPage extends Component{
 		
 		axios.get(`https://ethblogi1.herokuapp.com/api/blog/User/${userId}`)
 			.then(response => {
+				console.log(response)
 				this.setState({
 					userInfo:this.props.user,
 					articlesByUser:response.data[1].blogs,
 					userName:response.data[1].full_name,
 					userImage:response.data[1].image,
-					isSpinning:false
+					isSpinning:false,
+					errorMessage:response.data[1].blogs.length === 0 ? `No article is written yet.` : ''
 				})		
 		})
 		.catch(error => {
 			console.log(error)
-			this.setState({errorMessage:'Somthing went wrong. Please refresh the page !'})
+			this.setState({
+				errorMessage:'Somthing went wrong. Please refresh the page !',
+				isSpinning:false
+			})
+
 		})
 	}
 
 
-
+	deleteBlogFromState = (id) => {
+		const afterDelete = this.state.articlesByUser.filter(blog => blog.id !== id)
+		this.setState({articlesByUser:afterDelete})
+	}	
 
 
 	render(){
@@ -67,6 +76,7 @@ class UserPage extends Component{
 							userId={this.state.userId}
 							userName={this.state.userName}
 							userImage={this.state.userImage}
+							isAuth={this.props.isAuth}
 						/>
 					{
 					 this.state.errorMessage 
@@ -77,6 +87,8 @@ class UserPage extends Component{
 							fullName={this.state.userName}
 							errorMessage={this.state.errorMessage}
 							userId={this.state.userId}
+							ownAccount={this.state.ownAccount}
+							deleteBlogFromState={this.deleteBlogFromState}
 						/>
 					}
 				</div>

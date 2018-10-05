@@ -1,45 +1,10 @@
 import React, { Component } from 'react'
 import {  Input } from 'reactstrap'
-import { Card, CardHeader } from 'mdbreact'
-import { Link } from 'react-router-dom'
+import { Card, CardHeader, Fa } from 'mdbreact'
 import UserComments from './UserComments'
-import axios from 'axios'
 
 
 class CommentSection extends Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			newComment:'',
-		}
-	}
-
-
-
-	handleInputChange = (e) => {
-		this.setState({newComment:e.target.value})
-	}
-
-	addNewComment = () => {
-		console.log(this.props.token)
-		axios({
-			method:'post',
-			url:'https://ethblogi1.herokuapp.com/api/feedback/New',
-			headers:{
-				authorization:this.props.token
-			},
-			data:{
-				blog_id:this.props.blogId,
-				comments:this.state.newComment,
-				user_id:this.props.userId
-			}
-		}).then(response => {
-			console.log('comment', response)
-			this.setState({newComment:''})
-		})
-	}
-
-
 
 	render(){
 
@@ -49,37 +14,52 @@ class CommentSection extends Component{
 				this.props.openComment
 				?
 					<Card className="comment-form">
-						<CardHeader>
-							<div className="label">
+						<CardHeader className="label cardHeader comment-header white-text p-2">
+							<div className="">
 									<img 
-									src="https://bootdey.com/img/Content/avatar/avatar6.png" 
-									className="comment-avatar" 
+									src={this.props.user.image} 
+									className="rounded-circle z-depth-1-half" 
 									alt="user pic"
 								   />
-									<a className="name">Simon Sisay</a>
+									<p className="name d-inline pl-2">{this.props.user.full_name}</p>
+									{
+										this.props.newCommentSpinner 
+										? 
+										<Fa icon="spinner" 
+												spin size="2x" className="white-text"
+											/> 
+										: ''
+									}
 							</div>
 						</CardHeader>
 			          <Input 
 			       			className="textarea-form" 
 			       			type="textarea" 
 			       			name="blog" 
-			       			value={this.state.newComment}
-			       			onChange={this.handleInputChange}
+			       			value={this.props.newComment}
+			       			onChange={this.props.handleInputChange}
 			       			rows="4"
 			       			cols="4"
 			       			placeholder="write comment..."
 			          		required
 			          	/>
 			          	<button 
-			          		onClick={this.addNewComment}
-			          		className="btn btn-sm btn-green">
+			          		onClick={this.props.addNewComment}
+			          		className="btn btn-sm btn-indigo comment-button">
 			          		Comment
 			          	</button>
 					</Card>
 				: 
 					''
 			 }
-				<UserComments comments={this.props.comments}/>
+				<UserComments
+					deleteComment ={this.props.deleteComment}
+					comments={this.props.comments}
+					addNewComment={this.props.addNewComment}
+					deleteSpinner={this.props.deleteSpinner}
+					user={this.props.user}
+					isAuth={this.props.isAuth}
+				/>
 			</div>
 
 		)

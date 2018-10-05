@@ -12,16 +12,60 @@ class BlogWrittingForm extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			title:'',
-			blog:'',
-			imageUrl:'',
-			category:'',
+			title: this.props.title || '',
+			blog: this.props.blog || '',
+			imageUrl: this.props.imageUrl || '',
+			category: this.props.category || '',
+			fromEdit:false,
 			imagesFromUnsplash:[],
 			imageSearch:'',
 			isSpinnerOpen:false,
 			imageSpinner:false
 		}
 	}
+
+	componentDidMount(){
+		if(this.props.fromEdit){
+			this.setState({fromEdit:true})
+		}
+		else {
+			this.setState({fromEdit:false})
+		}
+	}
+
+
+
+	editBlog = () => {
+		this.setState({isSpinnerOpen:true})
+		axios({
+			method:'put',
+			url:`https://ethblogi1.herokuapp.com/api/blog/Update/${this.props.id}`,
+			headers:{
+				authorization:this.props.token
+			},
+			data:{
+				title:this.state.title,
+				category:this.state.category,
+				content:this.state.blog,
+				image:this.state.imageUrl
+			}
+		})
+		.then(response => {
+			console.log(response)
+			this.setState({blog:'', imageUrl:'', category:'', title:'', isSpinnerOpen:false})
+			this.props.redirect({
+			     pathname: `/user/${this.props.user.replace(' ', '')}`,
+			     state: {
+			     	id: this.props.userId
+			     }  
+			 })
+			})
+			.catch(error => {
+				console.log(error)
+			})
+	}
+
+
 
 	postNewBlog = (e) => {
 		e.preventDefault();
@@ -30,7 +74,7 @@ class BlogWrittingForm extends Component {
 			method:'post',
 			url:'https://ethblogi1.herokuapp.com/api/blog/New',
 			headers:{
-				token:this.props.token
+				authorization:this.props.token
 			},
 			data:{
 				title:this.state.title,
@@ -41,7 +85,13 @@ class BlogWrittingForm extends Component {
 		})
 		.then(response => {
 			this.setState({blog:'', imageUrl:'', category:'', title:'', isSpinnerOpen:false})
-			this.props.redirect.push(`/user/${this.props.user}`);
+			 this.props.redirect({
+			     pathname: `/user/${this.props.user.replace(' ', '')}`,
+			     state: {
+			     	id: this.props.userId
+			     }  
+			 })
+			// this.props.redirect.push(`/user/${this.props.user}`);
 		})
 
 	}
@@ -144,11 +194,12 @@ class BlogWrittingForm extends Component {
 		     {/********************  Submit *********/}
 		        <div className="post-button">
 		        		<Button 
-		        			type="submit" 
+		        			type="button" 
 		        			color="indigo" 
-		        			onClick={this.postNewBlog}
-		        			className="post-button">
-		        			Post
+		        			onClick={this.state.fromEdit ? this.editBlog : this.postNewBlog}
+		        			className="post-button"
+		        		>
+		        			{this.state.fromEdit ? 'Update' : 'Post'}
 		        		</Button>
 		        </div>
 		      </form>

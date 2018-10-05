@@ -31,17 +31,16 @@ const BlogFooter = (props) =>{
 	             style={{color:'skyblue'}} 
 	             onClick={props.tweetBlog}
 	           />
-	          <hr />
 	         {
 	         props.isAuth ?
 	         
 		         props.favourite 
 		         ? 
-		           <p> Saved to favourite </p> 
+		           <p className="fav"> Saved to favourite </p> 
 		         :  
 		         <a className="indigo-text" onClick={props.addToFavourites}>
 		           <Fa 
-		             className=""
+		             className="fav"
 		             icon="star" 
 		             size="1x"
 		           />

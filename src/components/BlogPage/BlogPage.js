@@ -1,37 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import BlogReadPage from './BlogReadPage'
 import { AuthContext }  from '../../context/AuthProvider'
 import './blogRead.css'
 
 
 
-class BlogPage extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			openComment:false
-		}
-	}
-
-
-
-
-	render(){
+const BlogPage = (props) =>  {
+	   console.log(props)
 		return(
 			<div className="content blog-read-content">
 				<AuthContext.Consumer>
 				{(context) => (
 					<BlogReadPage 
 						isAuth={context.isAuthenticated}
-						blogId={this.props.match.params.id} 
+						blogId={props.match.params.id} 
 						token={context.token}
+						user={context.user}
+						writer={props.location.state.writer}
 					/>
 				 )
 				}
 				</AuthContext.Consumer>
 			</div>
 		)
-	}
 }
 
 export default BlogPage

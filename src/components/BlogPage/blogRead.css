@@ -51,6 +51,7 @@
 .twitter-icon{
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 0 !important;
 }
 
 
@@ -80,6 +81,27 @@
 
 .comment-name{
 	display: flex;
+	width: 100%;
+	padding-right:15px;
+	padding-top:10px;
+	padding-left:5px;
+	justify-content: space-between;
+}
+
+.user-comment-info{
+	display: flex;
 	flex-direction: column;
-	margin-left: 5px
+}
+
+.comment-header{
+	background-color: #0B0011 !important;
+}
+
+.comment-button{
+	display: flex !important;
+	max-width: 100px;
+}
+
+.fav{
+	margin-top:0 !important;
 }

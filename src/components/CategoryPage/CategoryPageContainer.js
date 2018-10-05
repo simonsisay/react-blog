@@ -10,6 +10,7 @@ const CategoryPageContainer = (props) => {
 				token={context.token}
 				category={props.match.params.category}
 				user={context.user}
+				isAuth={context.isAuthenticated}
 			/>
 		)
 		}

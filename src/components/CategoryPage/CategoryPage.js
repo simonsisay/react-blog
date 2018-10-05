@@ -44,20 +44,22 @@ class CategoryPage extends Component {
 			this.setState({errorMessage:'Something went wrong . Please refresh the page !'})
 		})
 
-		axios({
-			method:'post',
-			url:'https:ethblogi1.herokuapp.com/api/Check/Category',
-			headers:{
-				authorization:this.props.token
-			},
-			data:{
-				category:this.props.category
-			}
-		})
-		.then(response => {
-			this.setState({following:response.data.following === 0 ? false : true})
+		if(this.props.isAuth){
+			axios({
+				method:'post',
+				url:'https:ethblogi1.herokuapp.com/api/Check/Category',
+				headers:{
+					authorization:this.props.token
+				},
+				data:{
+					category:this.props.category
+				}
+			})
+			.then(response => {
+				this.setState({following:response.data.following === 0 ? false : true})
 
-		}).catch(error => console.log(error))
+			}).catch(error => console.log(error))
+		}
 
 	}
 

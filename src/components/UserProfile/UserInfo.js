@@ -10,32 +10,32 @@ class UserInfo extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			followers:0,
-			following:0,
+			followers:'',
+			following:'',
 			isFollowing:false
 		}
 	}
 
 
 	componentDidMount(){
-	// 	axios.get({
-	// 		method:'post',
-	// 		url:`https://ethblogi1.herokuapp.com/api/User/Followers`,
-	// 		headers:{
-	// 			authorization:this.props.token
-	// 		},
-	// 		data:{
-	// 			followed_id:this.props.userId
-	// 		},
-	// 	})
-	// 	.then(response => {
-	// 		console.log('followers' ,response)
-	// 	}).catch(error => {
-	// 		console.log('followers', error)
-	// 	})
-	// }
+		axios({
+			method:'post',
+			url:`https://ethblogi1.herokuapp.com/api/User/Followers`,
+			headers:{
+				authorization:this.props.token
+			},
+			data:{
+				followed_id:this.props.userId
+			},
+		})
+		.then(response => {
+			this.setState({followers:`${response.data.followers}`})
+		}).catch(error => {
+			console.log('followers', error)
+		})
 
-		axios.get({
+
+		axios({
 			method:'get',
 			url:'https://ethblogi1.herokuapp.com/api/Following/User',
 			headers:{
@@ -43,10 +43,10 @@ class UserInfo extends Component{
 			},
 		})
 		.then(response => {
-			console.log('following', response)
+			this.setState({following:`${response.data.following}`})
 		})
 		.catch(error => {
-			// console.log("following", error)
+			console.log("following", error)
 		})
 
 
@@ -103,7 +103,7 @@ class UserInfo extends Component{
 				}
 
 			}).then(response => {
-				console.log(response)
+				this.setState({followers:this.state.followers - 1})
 			})
 		}
   }
@@ -115,11 +115,15 @@ class UserInfo extends Component{
 		  				<div className="user-name-email">
 			  				<h2>{this.props.userName}</h2>
 			  			</div>
-		  				<div className="badges">
+			  			{
+			  			this.props.isAuth 
+			  			?
+			  				<div className="badges">
 		  					<div>
 				  				<Badge color="blue-grey">Followers {this.state.followers}</Badge>
-				  				<Badge color="blue-grey">Following {this.state.following}</Badge>
+				  				{this.props.ownAccount ? <Badge color="blue-grey">Following {this.state.following}</Badge> : ''}
 				  			</div>
+
 				  			{this.props.ownAccount 
 				  			? 
 				  				''
@@ -142,6 +146,11 @@ class UserInfo extends Component{
 			  				}
 			  			</div>
 
+			  			
+			  			: ''
+			  			}
+
+
 		  			</div>
 
 		  			 <div className="avatar-and-button">
@@ -153,7 +162,17 @@ class UserInfo extends Component{
 				        {
 				        	this.props.ownAccount
 				         ? 
-				         	 <Link to="/write">
+				         	 <Link to={{
+		                      pathname:'/write',
+		                      state:{
+		                        title:'',
+		                        imageUrl:'',
+		                        category:'',
+		                        blog:'',
+		                        id:'',
+		                        fromEdit:false
+		                      }
+		                    }}>
 						  			<button className="btn btn-sm btn-outline-green">
 						  				New post <Fa icon="pencil" color="gray" />
 						  			</button>
