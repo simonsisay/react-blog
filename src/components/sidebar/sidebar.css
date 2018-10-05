@@ -1,135 +1,137 @@
 @import url('https://fonts.googleapis.com/css?family=Adamina|Lalezar|Noto+Serif+JP|Roboto+Slab|Sigmar+One');
 
 
-.sidebar{
-	background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
- 	background-blend-mode: multiply,multiply !important;
+.sidebar {
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+	background-blend-mode: multiply, multiply !important;
 	height: 100vh;
 	position: fixed;
-	z-index:1000000000;
+	z-index: 1000 !important;
 }
 
 
 
-.sidebar-header{
-	margin-top:10px;
+.sidebar-header {
+	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	font-family: 'Adamina', serif;
-	border-bottom:.1px solid #868D90;
-	padding-left:10px;
+	border-bottom: .1px solid #868D90;
+	padding-left: 10px;
 }
 
 .sidebar-header h5 {
-	color:white !important;
+	color: white !important;
 }
 
-.sidebar-header a{
-	text-decoration:none !important;
+.sidebar-header a {
+	text-decoration: none !important;
 }
 
-.sidebar-header p{
-	color:lightgray !important;
+.sidebar-header p {
+	color: lightgray !important;
 }
 
 
-.ant-layout-sider-children{
+.ant-layout-sider-children {
 	background-color: #020008;
 	background-image: url("https://www.transparenttextures.com/theme/images/transparent.png") !important;
 	height: 100vh !important;
 	overflow-x: hidden;
 }
 
-.ant-layout-sider-zero-width-trigger{
-	margin-top:30px !important;
+.ant-layout-sider-zero-width-trigger {
+	margin-top: 30px !important;
 }
 
 
-.ant-menu-light{
-	background:none !important;
+.ant-menu-light {
+	background: none !important;
 }
 
 
-.menu{
-	margin:0;
-	padding:0;
-	border-right:none !important;
+.menu {
+	margin: 0;
+	padding: 0;
+	border-right: none !important;
 }
 
-.nav-item a{
-	color:white !important;
-}
-.nav-item a{
-	border-bottom:.1px solid #868D90 !important;
+.nav-item a {
+	color: white !important;
 }
 
-.ant-menu-item-selected{
-	background:none !important;
+.nav-item a {
+	border-bottom: .1px solid #868D90 !important;
 }
 
-.nav-item a:visited{
-	color:white !important;
+.ant-menu-item-selected {
+	background: none !important;
+}
+
+.nav-item a:visited {
+	color: white !important;
 	font-weight: bold;
 	font-style: italic;
 }
 
 .nav-container {
-	padding-top:100px !important;
+	padding-top: 100px !important;
 }
 
-.nav-container h6{
-	text-align:left;
-	color:white;
-	font-weight:bold;
-	margin-top:40px;
-	margin-left:15px;
+.nav-container h6 {
+	text-align: left;
+	color: white;
+	font-weight: bold;
+	margin-top: 40px;
+	margin-left: 15px;
 }
 
 .ant-menu-inline .ant-menu-item:after {
-     border-right:none !important; 
+	border-right: none !important;
 }
 
-.active:hover{
+.active:hover {
 	font-weight: bold;
-	font-size:18px;
+	font-size: 18px;
 }
 
-.menu img{
-	height:80px;
-	width:80px;
-	border-radius:50%
+.menu img {
+	height: 80px;
+	width: 80px;
+	border-radius: 50%
 }
 
-.user-buttons{
+.user-buttons {
 	display: flex;
 	justify-content: center;
-	margin-top:5px;
+	margin-top: 5px;
 }
 
-.user-buttons button{
-	padding:5px !important;
+.user-buttons button {
+	padding: 5px !important;
 }
 
-.bookmarked-articles a{
-	font-size:small;
+.bookmarked-articles a {
+	font-size: small;
 }
 
-.signin-btn{
-	margin-left:40px !important;
+.signin-btn {
+	margin-left: 40px !important;
 }
 
-.signin-buttons{
-	margin-top:10px;
+.signin-buttons {
+	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
-.signin-buttons button{
-	padding:5px !important;
+
+.signin-buttons button {
+	padding: 5px !important;
 }
 
-.search-spinner-icon{
-	color:white !important;
+.search-spinner-icon {
+	color: white !important;
 }

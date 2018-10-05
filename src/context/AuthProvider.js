@@ -18,7 +18,7 @@ export class AuthProvider extends Component{
 		const token = localStorage.getItem("token");
 		this.setState({
 				user:jwt.decode(token), 
-				isAuthenticated:token ? true : false, 
+				isAuthenticated:token ? true : false,
 				token:token
 		})
 	}
@@ -26,7 +26,7 @@ export class AuthProvider extends Component{
 
 	authenticateUser = () => {
 		this.setState({isAuthenticated:true})
-		
+
 	}
 
 	signOutUser = () => {
