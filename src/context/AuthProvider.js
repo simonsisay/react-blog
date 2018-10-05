@@ -14,11 +14,11 @@ export class AuthProvider extends Component{
 		}
 	}
 
-	componentWillMount(){
+	async componentWillMount(){
 		const token = localStorage.getItem("token");
 		this.setState({
-				user:jwt.decode(token), 
-				isAuthenticated:token ? true : false, 
+				user:await jwt.decode(token), 
+				isAuthenticated:token ? true : false,
 				token:token
 		})
 	}
@@ -26,7 +26,7 @@ export class AuthProvider extends Component{
 
 	authenticateUser = () => {
 		this.setState({isAuthenticated:true})
-		
+
 	}
 
 	signOutUser = () => {
