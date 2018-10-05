@@ -1,31 +1,10 @@
 import React, { Component } from 'react'
 import {  Input } from 'reactstrap'
-import { Card, CardHeader } from 'mdbreact'
-import { Link } from 'react-router-dom'
+import { Card, CardHeader, Fa } from 'mdbreact'
 import UserComments from './UserComments'
-import axios from 'axios'
 
 
 class CommentSection extends Component{
-
-	deleteComment = (id) => {
-		console.log('deleting ', id)
-		axios({
-			method:'delete',
-			url:`https://ethblogi1.herokuapp.com/api/feedback//Delete/${id}`,
-			headers:{
-				authorization:this.props.token
-			}
-		})
-		.then(response => {
-			console.log(response)
-		})
-		.catch(error => {
-			console.log(error)
-		})
-	}
-
-
 
 	render(){
 
@@ -35,14 +14,22 @@ class CommentSection extends Component{
 				this.props.openComment
 				?
 					<Card className="comment-form">
-						<CardHeader>
-							<div className="label">
+						<CardHeader className="label cardHeader comment-header white-text p-2">
+							<div className="">
 									<img 
 									src={this.props.user.image} 
-									className="comment-avatar" 
+									className="rounded-circle z-depth-1-half" 
 									alt="user pic"
 								   />
-									<a className="name">{this.props.user.full_name}</a>
+									<p className="name d-inline pl-2">{this.props.user.full_name}</p>
+									{
+										this.props.newCommentSpinner 
+										? 
+										<Fa icon="spinner" 
+												spin size="2x" className="white-text"
+											/> 
+										: ''
+									}
 							</div>
 						</CardHeader>
 			          <Input 
@@ -50,7 +37,7 @@ class CommentSection extends Component{
 			       			type="textarea" 
 			       			name="blog" 
 			       			value={this.props.newComment}
-			       			onChange={this.handleInputChange}
+			       			onChange={this.props.handleInputChange}
 			       			rows="4"
 			       			cols="4"
 			       			placeholder="write comment..."
@@ -58,7 +45,7 @@ class CommentSection extends Component{
 			          	/>
 			          	<button 
 			          		onClick={this.props.addNewComment}
-			          		className="btn btn-sm btn-green">
+			          		className="btn btn-sm btn-indigo comment-button">
 			          		Comment
 			          	</button>
 					</Card>
@@ -66,9 +53,13 @@ class CommentSection extends Component{
 					''
 			 }
 				<UserComments
-					 deleteComment ={this.deleteComment}
+					deleteComment ={this.props.deleteComment}
 					comments={this.props.comments}
-					addNewComment={this.props.addNewComment}/>
+					addNewComment={this.props.addNewComment}
+					deleteSpinner={this.props.deleteSpinner}
+					user={this.props.user}
+					isAuth={this.props.isAuth}
+				/>
 			</div>
 
 		)

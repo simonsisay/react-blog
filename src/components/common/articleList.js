@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthProvider'
 
 
 const ArticleList = (props) => {
+	console.log(props)
 	return (
 		<div className="trending-articles-list">
 			 <h2 className="h1-responsive font-weight-bold text-center my-5">{props.title}</h2>

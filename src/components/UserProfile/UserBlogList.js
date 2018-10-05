@@ -3,14 +3,15 @@ import Blog from '../common/Blog'
 import {AuthContext} from '../../context/AuthProvider'
 import DeleteModal from './deleteModal'
 import axios from 'axios'
-
+import { Fa } from 'mdbreact'
 
 class UserBlogList extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			isModalOpen:false,
-			deleteId:undefined
+			deleteId:undefined,
+			isSpinning:false
 		}
 	}
 
@@ -24,20 +25,22 @@ class UserBlogList extends Component{
 
 
 	deleteBlog = () => {
-		this.setState({isModalOpen:false})
+		this.setState({isModalOpen:false, isSpinning:true})
 		axios({
 			method:'delete',
-			url:`'https://ethblogi1.herokuapp.com/api/blog/Delete/${this.state.deleteId}`,
+			url:`https://ethblogi1.herokuapp.com/api/blog/Delete/${this.state.deleteId}`,
 			headers:{
 				authorization:this.props.token
 			}
 		})
 		.then(response => {
 			console.log(response)
-			this.setState({deleteId:undefined})
+			this.setState({isSpinning:false})
+			this.props.deleteBlogFromState(this.state.deleteId)
 		})
 		.catch(error => {
 			console.log(error)
+			this.setState({isSpinning:false})
 		})
 	}
 
@@ -47,6 +50,14 @@ class UserBlogList extends Component{
 				<div className="trending-articles-list">
 				 <h2 className="h1-responsive font-weight-bold text-center my-5">{this.props.title}</h2>
 				<div className="articles-list">
+
+			
+			{
+			this.state.isSpinning
+			 ?
+			  <Fa icon="spinner" spin size="3x" />
+
+			 :
 
 				<AuthContext.Consumer>
 				{(context) => (
@@ -71,6 +82,7 @@ class UserBlogList extends Component{
 				 </div>
 				)}
 				</AuthContext.Consumer>
+			}
 			</div>
 			<DeleteModal 
 				toggleModal={this.toggleModal}

@@ -51,12 +51,19 @@ class UserPage extends Component{
 		})
 		.catch(error => {
 			console.log(error)
-			this.setState({errorMessage:'Somthing went wrong. Please refresh the page !'})
+			this.setState({
+				errorMessage:'Somthing went wrong. Please refresh the page !',
+				isSpinning:false
+			})
+
 		})
 	}
 
 
-
+	deleteBlogFromState = (id) => {
+		const afterDelete = this.state.articlesByUser.filter(blog => blog.id !== id)
+		this.setState({articlesByUser:afterDelete})
+	}	
 
 
 	render(){
@@ -81,6 +88,7 @@ class UserPage extends Component{
 							errorMessage={this.state.errorMessage}
 							userId={this.state.userId}
 							ownAccount={this.state.ownAccount}
+							deleteBlogFromState={this.deleteBlogFromState}
 						/>
 					}
 				</div>

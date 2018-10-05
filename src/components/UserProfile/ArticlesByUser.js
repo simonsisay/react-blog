@@ -18,7 +18,7 @@ const ArticlesByUser = (props) => {
 					<h2>{props.errorMessage}</h2>
 				:
 					<div>
-						<p>Articles</p>
+						<p className="font-weight-bold text-center">Articles</p>
 						<hr />
 
 						<AuthContext.Consumer>
@@ -29,6 +29,7 @@ const ArticlesByUser = (props) => {
 								userId={props.userId}
 								ownAccount={props.ownAccount}
 								token={context.token}
+								deleteBlogFromState={props.deleteBlogFromState}
 							/>
 							)}
 						</AuthContext.Consumer>

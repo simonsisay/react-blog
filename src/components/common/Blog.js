@@ -14,6 +14,30 @@ class Blog extends Component{
     }
   }
 
+  componentDidMount(){
+   if(this.props.isAuth){
+        axios({
+          method:'get',
+          url:'https://ethblogi1.herokuapp.com/api/blog/get/readLater',
+          headers:{
+            authorization:this.props.token
+          }
+        })
+        .then(response => {
+          response.data[1].rows.forEach(item => {
+            if(item.blog_id === this.props.id){
+              this.setState({bookmarked:true})
+            }
+          })
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+}
+
+
 
   bookmarkArticle = () => {
     this.setState({bookmarked:!this.state.bookmarked})
@@ -103,13 +127,19 @@ class Blog extends Component{
                   }
                 }}
                 >
-                  <strong> {this.props.writer}</strong>
+                  <strong> {this.props.writer} </strong>
                 </Link>
               </p>
               <p>{formatted}</p>
 
               <div className="blog-read-and-bookmark">
-                  <Link to={`/blog/${this.props.id}`}>
+                  <Link to={{
+                      pathname:`/blog/${this.props.id}`,
+                      state:{
+                        writer:this.props.writer
+                      }
+                    }}
+                  >
                       <Button 
                         color="indigo" size="md" 
                         className="waves-light "
@@ -119,19 +149,21 @@ class Blog extends Component{
                   </Link>
               {
               this.props.isAuth 
-              ? 
-                 <div className="bookmark">
-                  <Fa 
-                    className="float-right mr-5 bookmark-icon" 
-                    onClick={this.bookmarkArticle}
-                    icon="bookmark" 
-                    style={{color:this.state.bookmarked ? 'orange' : 'gray', cursor:'pointer'}}
-                  />
-                  <small className="float-right mr-5">read later</small>
-                </div>
-              : 
-                ''
-              }
+              ?
+                !this.state.bookmarked 
+                ? 
+                   <div className="bookmark">
+                    <Fa 
+                      className="float-right mr-5 bookmark-icon" 
+                      onClick={this.bookmarkArticle}
+                      icon="bookmark" 
+                    />
+                    <small className="float-right mr-5">read later</small>
+                  </div>
+                : 
+                  <small>bookmarked</small>
+                : ''
+                }
               </div>
 
           </Col>

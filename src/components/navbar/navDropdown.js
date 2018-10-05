@@ -56,7 +56,7 @@ class NavDropDown extends Component{
             method:'delete',
             url:`https://ethblogi1.herokuapp.com/api/blog/Delete/readLater/${id}`,
             headers:{
-            	token:this.props.token
+            	authorization:this.props.token
             }
         })
         .then(response => {
@@ -75,7 +75,7 @@ class NavDropDown extends Component{
             method:'delete',
             url:`https://ethblogi1.herokuapp.com/api/blog/Delete/Favorite/${id}`,
             headers:{
-            	token:this.props.token,
+            	authorization:this.props.token,
         }})
         .then(response => {
             console.log(response)

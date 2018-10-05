@@ -4,6 +4,7 @@ import axios from 'axios'
 import moment from 'moment'
 import BlogFooter from './BlogFooter'
 import CommentSection from './CommentSection'
+import { Link } from 'react-router-dom'
 
 class BlogPage extends Component {
   constructor(props){
@@ -18,20 +19,24 @@ class BlogPage extends Component {
       author:'Simon Sisay',
       favourite:false,
       openComment:false,
-      newComment:''
+      newComment:'',
+      newCommentSpinner:false,
+      deleteSpinner:false,
+      writer:''
     }
   }
 
 
   componentDidMount(){
-    this.setState({isSpining:true})
+    this.setState({isSpining:true, writer:this.props.writer})
     
     axios.get(`https://ethblogi1.herokuapp.com/api/blog/${this.props.blogId}`)
     .then(response => {
-      console.log(response.data[2].comments.rows)
+      console.log(response.data[0].data)
       this.setState({
           blog:response.data[0].data, 
-          isSpining:false, likes:response.data[0].data.like, 
+          isSpining:false, 
+          likes:response.data[0].data.like, 
           liked:false,
           comments:response.data[2].comments.rows
       })
@@ -43,26 +48,36 @@ class BlogPage extends Component {
 
     /*********** Check if this article was added to favourites ******************/
 
-    axios({
-      method:'get',
-      url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
-      headers:{
-        authorization:this.props.token
-      }
-    })
-    .then(response => {
-      response.data[1].rows.forEach(item => {
-        if(item.blog_id === this.props.blogId){
-          this.setState({favourite:true})
+    if(this.props.isAuth){
+      axios({
+        method:'get',
+        url:'https://ethblogi1.herokuapp.com/api/blog/get/Favorite',
+        headers:{
+          authorization:this.props.token
         }
       })
-    })
-    .catch(error => {
-      console.log(error)
-    })
+      .then(response => {
+        response.data[1].rows.forEach(item => {
+          if(item.blog_id === this.props.blogId){
+            this.setState({favourite:true})
+          }
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
   }
 
+
+  handleInputChange = (e) => {
+    this.setState({newComment:e.target.value})
+  }
+
+
+
   addNewComment = () => {
+    this.setState({newCommentSpinner:true})
     axios({
       method:'post',
       url:'https://ethblogi1.herokuapp.com/api/feedback/New',
@@ -75,16 +90,37 @@ class BlogPage extends Component {
         user_id:this.props.userId
       }
     }).then(response => {
-      console.log(response)
-      this.setState({comments:[...this.state.comments, response.data[0]]})
-      this.setState({newComment:''})
+      this.setState({
+          comments:[...this.state.comments, response.data[0]], 
+          openComment:false, 
+          newCommentSpinner:false
+
+      })
     })
   }
 
 
-  handleInputChange = (e) => {
-    this.setState({newComment:e.target.value})
+ deleteComment = (id) => {
+    this.setState({deleteSpinner:true})
+    console.log(this.state.deleteSpinner)
+    axios({
+      method:'delete',
+      url:`https://ethblogi1.herokuapp.com/api/feedback//Delete/${id}`,
+      headers:{
+        authorization:this.props.token
+      }
+    })
+    .then(response => {
+      console.log(response)
+      const afterDelete = this.state.comments.filter(item => id !== item.id)
+      this.setState({comments:afterDelete, deleteSpinner:false})
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    console.log(this.state.deleteSpinner)
   }
+
 
 
   toggleComment = () => {
@@ -97,7 +133,7 @@ class BlogPage extends Component {
     if(this.state.liked){
       this.setState({
         liked:false, 
-        likes:this.state.likes -= 1
+        likes:this.state.likes - 1
     })
         axios({
           method:'get',
@@ -114,7 +150,7 @@ class BlogPage extends Component {
     else {
       this.setState({
         liked:true, 
-        likes:this.state.likes += 1
+        likes:this.state.likes + 1
       })
         axios({
           method:'get',
@@ -188,7 +224,14 @@ class BlogPage extends Component {
                   <CardBody cascade className="text-center">
                       <h2 className="font-weight-bold"><a>{this.state.blog.title}</a></h2>
                       <p>Written by 
-                        <a><strong> Simon Sisay </strong></a>
+                          <Link to={{
+                            pathname:`/user/${this.state.blog.user_id}`,
+                            state:{
+                              id:this.state.blog.user_id
+                            }
+                          }}>
+                            <strong> {this.state.writer} </strong>
+                          </Link>
                       </p>
                       <p>{formatted}</p>
                   </CardBody>
@@ -211,6 +254,8 @@ class BlogPage extends Component {
                 liked={this.state.liked}
                 isAuth={this.props.isAuth}
              />
+          {
+            this.props.isAuth ?
              <CommentSection 
                 openComment={this.state.openComment}
                 blogId={this.props.blogId}
@@ -219,7 +264,13 @@ class BlogPage extends Component {
                 token={this.props.token}
                 user={this.props.user}
                 addNewComment={this.addNewComment}
+                handleInputChange={this.handleInputChange}
+                deleteComment={this.deleteComment}
+                newCommentSpinner={this.state.newCommentSpinner}
+                deleteSpinner={this.state.deleteSpinner}
              />
+             : ''
+          }
             </Container>
       )
    }

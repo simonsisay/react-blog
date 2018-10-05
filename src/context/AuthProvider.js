@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-// import axios from 'axios'
 import jwt from 'jsonwebtoken'
 
 export const AuthContext = React.createContext();
-
-
 
 
 export class AuthProvider extends Component{
