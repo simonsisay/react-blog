@@ -15,7 +15,7 @@ class SignIn extends Component{
 		localStorage.setItem("token", data.authorization)
 		this.props.signIn();
 		console.log(data.authorization)
-		this.props.redirect('/')
+		window.location = "ethiblogi.herokuapp.com";
 		//console.log(localStorage.setItem('token', data.authorization)
 	}
 

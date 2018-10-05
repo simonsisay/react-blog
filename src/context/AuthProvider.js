@@ -14,10 +14,10 @@ export class AuthProvider extends Component{
 		}
 	}
 
-	async componentWillMount(){
+	componentWillMount(){
 		const token = localStorage.getItem("token");
 		this.setState({
-				user:await jwt.decode(token), 
+				user:jwt.decode(token), 
 				isAuthenticated:token ? true : false,
 				token:token
 		})
