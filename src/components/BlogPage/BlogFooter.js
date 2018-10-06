@@ -3,6 +3,7 @@ import { Fa } from 'mdbreact'
 
 
 const BlogFooter = (props) =>{
+	console.log(props)
 	return(
 		<div className="article-footer">
 		{
@@ -16,10 +17,16 @@ const BlogFooter = (props) =>{
 	             size="2x"
 	           />
 	           <small>{props.likes}</small>
-	           <Fa 
-	             icon="comment" className="comment-icon" size="2x" color="gray"
-	             onClick={props.toggleComment}
-	           />
+	           {
+	           	props.alreadyCommented 
+	           	? 
+	           		''
+	           	:
+		           <Fa 
+		             icon="comment" className="comment-icon" size="2x" color="gray"
+		             onClick={props.toggleComment}
+		           />
+		         }
 	       </div>
 	      : ''
 	   }

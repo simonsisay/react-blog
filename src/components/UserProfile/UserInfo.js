@@ -74,7 +74,7 @@ class UserInfo extends Component{
 	followOrUnFollowUser = () => {
 
 		if(!this.state.isFollowing){
-			this.setState({isFollowing:true})
+			this.setState({isFollowing:true, followers:toString(Number(this.state.followers) + 1) })
 			axios({
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Follow/User',

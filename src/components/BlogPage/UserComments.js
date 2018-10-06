@@ -4,7 +4,6 @@ import moment from 'moment'
 import { Link } from 'react-router-dom'
 
 const UserComments = (props) => {
-	console.log(props )
 		return(
 		 	<div className="user-comments-container">
 		 	{		 	
@@ -13,7 +12,7 @@ const UserComments = (props) => {
 		 		<h5>no comments on this post yet . </h5>
 		 	:
 		 	props.comments.map(comment => 
-		    <div key={comment.id}>
+		    <div key={comment.id} className="comment-container">
 				<Card className="news">
 	              <CardHeader className="p-2 label cardHeader comment-header white-text">
 	                <img 

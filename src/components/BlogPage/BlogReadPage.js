@@ -22,7 +22,8 @@ class BlogPage extends Component {
       newComment:'',
       newCommentSpinner:false,
       deleteSpinner:false,
-      writer:''
+      writer:'',
+      alreadyCommented:false
     }
   }
 
@@ -30,9 +31,10 @@ class BlogPage extends Component {
   componentDidMount(){
     this.setState({isSpining:true, writer:this.props.writer})
     
+    /******** Get blog info **********/
+
     axios.get(`https://ethblogi1.herokuapp.com/api/blog/${this.props.blogId}`)
     .then(response => {
-      console.log(response.data[0].data)
       this.setState({
           blog:response.data[0].data, 
           isSpining:false, 
@@ -40,11 +42,12 @@ class BlogPage extends Component {
           liked:false,
           comments:response.data[2].comments.rows
       })
-
     }).catch((error) => {
       console.log(error)
       this.setState({errorMessage:'Something went wrong . Please refresh the page !'})
-    })
+    })  
+
+
 
     /*********** Check if this article was added to favourites ******************/
 
@@ -62,6 +65,37 @@ class BlogPage extends Component {
             this.setState({favourite:true})
           }
         })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    /************** Check if user has already commented **********/
+      axios({
+        method:'get',
+        url:`https://ethblogi1.herokuapp.com/api/feedback/check/comment/${this.props.blogId}`,
+        headers:{
+          authorization:this.props.token
+        },
+      })
+      .then(response => {
+        this.setState({alreadyCommented:response.data.commented === 0 ? false : true})
+      })
+      .catch(error => {
+        console.log(error)
+      })
+
+    /************ Check if user has aready liked the blog ***********/
+
+     axios({
+        method:'get',
+        url:`https://ethblogi1.herokuapp.com/api/check/like/${this.props.blogId}`,
+        headers:{
+          authorization:this.props.token
+        },
+      })
+      .then(response => {
+        this.setState({liked:response.data.liked === 0 ? false : true})
       })
       .catch(error => {
         console.log(error)
@@ -102,7 +136,7 @@ class BlogPage extends Component {
 
  deleteComment = (id) => {
     this.setState({deleteSpinner:true})
-    console.log(this.state.deleteSpinner)
+
     axios({
       method:'delete',
       url:`https://ethblogi1.herokuapp.com/api/feedback//Delete/${id}`,
@@ -111,7 +145,6 @@ class BlogPage extends Component {
       }
     })
     .then(response => {
-      console.log(response)
       const afterDelete = this.state.comments.filter(item => id !== item.id)
       this.setState({comments:afterDelete, deleteSpinner:false})
     })
@@ -253,6 +286,7 @@ class BlogPage extends Component {
                 addToFavourites={this.addToFavourites}
                 liked={this.state.liked}
                 isAuth={this.props.isAuth}
+                alreadyCommented={this.state.alreadyCommented}
              />
           {
             this.props.isAuth ?

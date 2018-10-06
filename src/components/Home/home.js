@@ -19,7 +19,6 @@ class Home extends Component {
 	componentDidMount(){
 		axios.get('https://ethblogi1.herokuapp.com/api/blog/all')
 		.then(response => {
-			console.log(response)
 			this.setState({allBlog:response.data[1].rows})
 			const latestFive = this.state.allBlog.sort((a, b) => {
 				return a.createdAt < b.createdAt ? 1 : -1
