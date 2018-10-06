@@ -74,7 +74,7 @@ class UserInfo extends Component{
 	followOrUnFollowUser = () => {
 
 		if(!this.state.isFollowing){
-			this.setState({isFollowing:true, followers:toString(Number(this.state.followers) + 1) })
+			this.setState({isFollowing:true, followers:`${parseInt(this.state.followers) + 1}`})
 			axios({
 				method:'post',
 				url:'https://ethblogi1.herokuapp.com/api/Follow/User',
@@ -91,9 +91,9 @@ class UserInfo extends Component{
 		}
 
 		else {
-			this.setState({isFollowing:false})
+			this.setState({isFollowing:false,  followers:`${parseInt(this.state.followers) - 1}`})
 			axios({
-				method:'post',
+				method:'delete',
 				url:'https://ethblogi1.herokuapp.com/api/Unfollow/User',
 				headers:{
 					authorization:this.props.token
@@ -103,7 +103,7 @@ class UserInfo extends Component{
 				}
 
 			}).then(response => {
-				this.setState({followers:this.state.followers - 1})
+				console.log(response)
 			})
 		}
   }

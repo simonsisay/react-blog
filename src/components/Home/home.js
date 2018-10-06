@@ -28,7 +28,11 @@ class Home extends Component {
 				return a.like < b.like ? 1 : -1
 			}).slice(0, 5)
 
-			this.setState({trendingArticles:trendingFive, recentArticles:latestFive})
+			this.setState({
+				trendingArticles:trendingFive, 
+				recentArticles:latestFive, 
+				errorMessage:this.state.allBlog.length === 0 ? 'No article has been written yet !' : ''
+		})
 
 		}).catch(() => {
 			this.setState({errorMessage:'Something went wrong . Please refresh the page !'})

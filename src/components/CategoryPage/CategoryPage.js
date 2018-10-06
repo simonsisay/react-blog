@@ -105,7 +105,7 @@ class CategoryPage extends Component {
 	render(){
 		return(
 			<div className="content">
-				<div className="category-header sticky-top">
+				<div className="category-header">
 				<h2 className="h2-responsive category-name font-weight-bold">{this.state.category.toUpperCase()}</h2>
 			<AuthContext.Consumer>
 			{context => 
@@ -132,7 +132,7 @@ class CategoryPage extends Component {
 					:  
 					this.state.blogs.length === 0 
 					?
-						 <h4>No article written in this category</h4>
+						 <h4>No article is written in this category</h4>
 					:
 						<div>
 							<h4 className="h5-responsive font-weight-bold pl-2">Trending</h4>

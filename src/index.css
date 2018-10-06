@@ -86,3 +86,7 @@ body::-webkit-scrollbar-thumb {
 .favourite-dropdown{
 	margin-left:20px !important;
 }
+
+.drop-item{
+	color:black !important;
+}

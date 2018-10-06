@@ -112,8 +112,10 @@ class NavDropDown extends Component{
                             <p className="text-center">List is empty</p>
                         :
                             this.state.readLater.map(item => (
-                                   <div className="nav-dropdown-list" key={item.id}>
-                                     <DropdownItem href={`/blog/${item.blog_id}`} >
+                                   <div className="nav-dropdown-list black-text font-weight-bold" key={item.id}>
+                                     <DropdownItem 
+                                        href={`/blog/${item.blog_id}`} 
+                                        className="drop-item font-weight-bold">
                                         {item.title}
                                      </DropdownItem>
                                      <Fa icon="close" onClick={() => this.deleteBookMarked(item.id)}/>
@@ -142,7 +144,7 @@ class NavDropDown extends Component{
                          :
                             this.state.favourite.map(item => (
                                 <div className="nav-dropdown-list" key={item.id}>
-                                     <DropdownItem href={`/blog/${item.blog_id}`} >
+                                     <DropdownItem href={`/blog/${item.blog_id}`} className="drop-item font-weight-bold">
                                         {item.title}
                                      </DropdownItem>
                                       <Fa icon="close" onClick={() => this.deleteFavourite(item.id)}/>

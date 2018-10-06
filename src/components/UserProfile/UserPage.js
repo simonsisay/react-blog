@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import UserInfo from './UserInfo'
 import ArticlesByUser from './ArticlesByUser'
 import axios from 'axios'
-// import { Fa } from 'mdbreact'
+
 
 class UserPage extends Component{
 	constructor(props){

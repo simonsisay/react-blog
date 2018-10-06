@@ -127,7 +127,8 @@ class BlogPage extends Component {
       this.setState({
           comments:[...this.state.comments, response.data[0]], 
           openComment:false, 
-          newCommentSpinner:false
+          newCommentSpinner:false,
+          alreadyCommented:true
 
       })
     })
@@ -176,7 +177,6 @@ class BlogPage extends Component {
           }
           }).then(response => {
             console.log(response)
-
           }).catch(error => console.log(error))
     }
 
