@@ -36,6 +36,8 @@ class UserPage extends Component{
 			userId = this.props.otherId
 			this.setState({userId})
 		}
+
+		console.log('id', userId)
 		
 		axios.get(`https://ethblogi1.herokuapp.com/api/blog/User/${userId}`)
 			.then(response => {

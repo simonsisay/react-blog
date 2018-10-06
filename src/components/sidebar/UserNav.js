@@ -17,19 +17,12 @@ const UserNav = (props) => {
           <AuthContext.Consumer>
           {(context) => (
             <React.Fragment>
-                <Link to={{
-                  pathname:`/user/${context.user.full_name.replace(' ', '')}`,
-                  state:{
-                    ownAccount:true,
-                    id:context.user.facebook_id || context.user.id
-                  }
-                }}
-                >
-                <button 
-                  className="btn btn-sm btn-secondary" 
-                  >
-                  Profile
-                </button>
+                <Link to={`/user/${context.user.id}`}>
+                  <button 
+                    className="btn btn-sm btn-secondary" 
+                    >
+                    Profile
+                  </button>
                </Link>
                <button 
                   className=" btn btn-sm btn-danger"

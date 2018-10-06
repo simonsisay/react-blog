@@ -29,7 +29,6 @@ class Blog extends Component{
               this.setState({bookmarked:true})
             }
           })
-          console.log(response)
         })
         .catch(error => {
           console.log(error)
@@ -120,25 +119,14 @@ class Blog extends Component{
               </p>
 
               <p>by 
-                <Link to={{
-                  pathname:`/user/${this.props.writer.replace(' ', '')}`,
-                  state:{
-                    id:this.props.userId
-                  }
-                }}
-                >
+                <Link to={`/user/${this.props.userId}`}>
                   <strong> {this.props.writer} </strong>
                 </Link>
               </p>
               <p>{formatted}</p>
 
               <div className="blog-read-and-bookmark">
-                  <Link to={{
-                      pathname:`/blog/${this.props.id}`,
-                      state:{
-                        writer:this.props.writer
-                      }
-                    }}
+                  <Link to={`/blog/${this.props.id}`}
                   >
                       <Button 
                         color="indigo" size="md" 

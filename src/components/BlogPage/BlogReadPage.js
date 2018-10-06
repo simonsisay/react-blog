@@ -29,18 +29,20 @@ class BlogPage extends Component {
 
 
   componentDidMount(){
-    this.setState({isSpining:true, writer:this.props.writer})
+    this.setState({isSpining:true})
     
     /******** Get blog info **********/
 
     axios.get(`https://ethblogi1.herokuapp.com/api/blog/${this.props.blogId}`)
     .then(response => {
+      console.log(response)
       this.setState({
           blog:response.data[0].data, 
           isSpining:false, 
           likes:response.data[0].data.like, 
           liked:false,
-          comments:response.data[2].comments.rows
+          comments:response.data[2].comments.rows,
+          writer:response.data[3].User.name
       })
     }).catch((error) => {
       console.log(error)
@@ -257,12 +259,7 @@ class BlogPage extends Component {
                   <CardBody cascade className="text-center">
                       <h2 className="font-weight-bold"><a>{this.state.blog.title}</a></h2>
                       <p>Written by 
-                          <Link to={{
-                            pathname:`/user/${this.state.blog.user_id}`,
-                            state:{
-                              id:this.state.blog.user_id
-                            }
-                          }}>
+                          <Link to={`/user/${this.state.blog.user_id}`}>
                             <strong> {this.state.writer} </strong>
                           </Link>
                       </p>

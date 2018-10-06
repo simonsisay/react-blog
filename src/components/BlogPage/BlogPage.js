@@ -24,7 +24,6 @@ class BlogPage extends Component {
 						blogId={this.props.match.params.id} 
 						token={context.token}
 						user={context.user}
-						writer={this.props.location.state.writer}
 					/>
 				 )
 				}

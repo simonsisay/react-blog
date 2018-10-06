@@ -22,13 +22,9 @@ const UserComments = (props) => {
 	               	/>
 	                  <div className="comment-name">
 	                  	<div className="user-comment-info">
-			                  <Link to={{
-			                  	pathname:`/user/${comment.name.replace(' ', '')}`,
-			                  	state:{
-			                  		id:comment.user_id
-			                  	}
-			                  }}
-			                  	className="name white-text">
+			                  <Link to={`/user/${comment.user_id}`}
+			                  	className="name white-text"
+			                  >
 			                  	{comment.name}
 			                  </Link> 
 			                  <small className="date">{ moment(comment.createdAt).format('D MMMM YYYY') }</small>
