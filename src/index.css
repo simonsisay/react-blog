@@ -88,5 +88,16 @@ body::-webkit-scrollbar-thumb {
 }
 
 .drop-item{
-	color:black !important;
+	color:white !important;
 }
+/*.nav-dropdown-list{
+	background:#020008 !important;
+	color:white !important;
+}*/
+
+
+.nav-menu{
+	background:#020008 !important;
+	color:white !important;
+}
+

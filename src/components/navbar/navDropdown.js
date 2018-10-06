@@ -101,7 +101,7 @@ class NavDropDown extends Component{
                             Saved for later
                         </DropdownToggle>
 
-                        <DropdownMenu>
+                        <DropdownMenu className="nav-menu white-text">
                          {
                         this.state.isSpinning 
                         ? 
@@ -112,10 +112,10 @@ class NavDropDown extends Component{
                             <p className="text-center">List is empty</p>
                         :
                             this.state.readLater.map(item => (
-                                   <div className="nav-dropdown-list black-text font-weight-bold" key={item.id}>
+                                   <div className="nav-dropdown-list" key={item.id}>
                                      <DropdownItem 
                                         href={`/blog/${item.blog_id}`} 
-                                        className="drop-item font-weight-bold">
+                                        className="drop-item white">
                                         {item.title}
                                      </DropdownItem>
                                      <Fa icon="close" onClick={() => this.deleteBookMarked(item.id)}/>
@@ -132,7 +132,7 @@ class NavDropDown extends Component{
                             Favourites
                         </DropdownToggle>
 
-                         <DropdownMenu className="favourite-dropdown">
+                         <DropdownMenu className="favourite-dropdown nav-menu">
                          {
                         this.state.isSpinning 
                         ? 
@@ -143,8 +143,9 @@ class NavDropDown extends Component{
                             <p className="text-center">List is empty</p>
                          :
                             this.state.favourite.map(item => (
-                                <div className="nav-dropdown-list" key={item.id}>
-                                     <DropdownItem href={`/blog/${item.blog_id}`} className="drop-item font-weight-bold">
+                                <div className="nav-dropdown-list font-weight-bold" key={item.id}>
+                                     <DropdownItem href={`/blog/${item.blog_id}`} 
+                                     className="drop-item white">
                                         {item.title}
                                      </DropdownItem>
                                       <Fa icon="close" onClick={() => this.deleteFavourite(item.id)}/>
