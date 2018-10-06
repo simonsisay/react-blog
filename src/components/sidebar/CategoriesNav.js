@@ -37,9 +37,9 @@ class CategoriesNav extends Component {
               href="/category/music">Music
             </a>
         </Menu.Item>
-          <Menu.Item className="nav-item">
+          <Menu.Item className="nav-item tech-cat-nav">
              <a 
-              className="active" 
+              className="active mb-3" 
               href="/category/technology">Technology
             </a>
         </Menu.Item>
